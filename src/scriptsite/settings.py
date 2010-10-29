@@ -18,10 +18,13 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+# Calculated site root
+PATH_SITE_ROOT = os.path.normpath(os.path.dirname(__file__))
+
 DATABASES = {
     'default': {
-        'ENGINE': '', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': os.path.join(PATH_SITE_ROOT, 'site.db'),                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -45,9 +48,6 @@ SITE_ID = 1
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
 USE_I18N = True
-
-# Calculated site root
-PATH_SITE_ROOT = os.path.normpath(os.path.dirname(__file__))
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"

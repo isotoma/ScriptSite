@@ -35,6 +35,8 @@ urlpatterns = patterns('',
     # actually is. Many user agents (RIM based blackberry browsers, old 
     # versions of IE etc) lazily look in the root first, raising a 404
     (r'^favicon\.ico$', lambda r: HttpResponseRedirect('/static/images/favicon.ico')),
+    
+    (r'^upload/', 'scriptsite.main.views.upload'),
 )
 
 # Serve static content through Django.
