@@ -13,8 +13,8 @@ from django.http import HttpResponseNotFound, HttpResponseServerError
 from django.template.loader import render_to_string
 
 # Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
+from django.contrib import admin
+admin.autodiscover()
 
 urlpatterns = patterns('',
 
@@ -23,7 +23,7 @@ urlpatterns = patterns('',
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    # (r'^admin/', include(admin.site.urls)),
+    (r'^admin/', include(admin.site.urls)),
         
     # Prevent search engine spiders from generating 404s when looking for a 
     # robots.txt. Obviously remove these if using actual files
