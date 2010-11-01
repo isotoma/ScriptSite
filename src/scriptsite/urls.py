@@ -16,6 +16,8 @@ from django.template.loader import render_to_string
 from django.contrib import admin
 admin.autodiscover()
 
+from scriptsite.main.views import script, script_home, upload
+
 urlpatterns = patterns('',
 
     # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
@@ -36,7 +38,10 @@ urlpatterns = patterns('',
     # versions of IE etc) lazily look in the root first, raising a 404
     (r'^favicon\.ico$', lambda r: HttpResponseRedirect('/static/images/favicon.ico')),
     
-    (r'^upload/', 'scriptsite.main.views.upload'),
+    url(r'^script/(?P<script_id>\d+)/$', script, name = 'script'),
+    url(r'^script/', script_home, name = 'script_home'),
+    url(r'^upload/', upload, name = 'upload'),
+    
 )
 
 # Serve static content through Django.

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <ul>
+    {% for script in scripts %}
+        <li><a href="{{ script.id }}">{{ script.script_file.name }}</a></li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}

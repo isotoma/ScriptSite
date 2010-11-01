@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{{ script.script_file }}
+{{ num_tests }}
+
+<div>
+<form action="." method="POST">
+    <input type="submit" value="Create Test Run" />
+</form>
+</div>
+
+{% endblock %}
