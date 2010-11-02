@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<ul>
+{% for run in runs %}
+ <li><a href="{{ run.id }}/">{{ run.id }}</a></li>
+{% endfor %}
+</ul>
+
+{% endblock %}

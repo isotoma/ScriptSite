@@ -54,5 +54,7 @@ def convert_script_to_models(script):
             test_model.test_group = group_model
             test_model.save()
             
+    return test_run
+            
 
     

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3>Run Statistics</h3>
+<p>Created: {{ run.date_started }}</p>
+<p>Passed: </p>
+<p>Failed: </p>
+
+<h3>Groups to test</h3>
+<ul>
+{% for group in groups %}
+ <li>{{ group.name }}</li>
+{% endfor %}
+</ul>
+
+<form action="." method="POST">
+{% csrf_token %}
+<input type="submit" value="View Run" />
+</form>
+
+{% endblock %} 
+

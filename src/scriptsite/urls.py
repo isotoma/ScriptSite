@@ -16,7 +16,7 @@ from django.template.loader import render_to_string
 from django.contrib import admin
 admin.autodiscover()
 
-from scriptsite.main.views import script, script_home, upload
+from scriptsite.main.views import script, script_home, upload, test_run, test_run_home, view_run
 
 urlpatterns = patterns('',
 
@@ -40,6 +40,9 @@ urlpatterns = patterns('',
     
     url(r'^script/(?P<script_id>\d+)/$', script, name = 'script'),
     url(r'^script/', script_home, name = 'script_home'),
+    url(r'testrun/view/(?P<run_id>\d+)/$', view_run, name = 'view_run'),
+    url(r'testrun/(?P<run_id>\d+)/$', test_run, name = 'test_run'),
+    url(r'testrun/', test_run_home, name = 'test_run_home'),
     url(r'^upload/', upload, name = 'upload'),
     
 )
