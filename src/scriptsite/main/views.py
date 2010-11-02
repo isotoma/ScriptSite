@@ -62,14 +62,17 @@ def test_run(request, run_id):
         return HttpResponseRedirect(reverse('test_run_home'))
     
     if request.method == 'POST':
-        return HttpResponseRedirect(reverse('view_run', kwargs = {'run_id': test_run.id}))
+        if request.POST.get('view', None):
+            return HttpResponseRedirect(reverse('view_run', kwargs = {'run_id': test_run.id}))
+        if request.POST.get('edit', None):
+            return HttpResponseRedirect(reverse('edit_run', kwargs = {'run_id': test_run.id}))
     
     data['run'] = test_run
     data['groups'] = test_run.testgroup_set.all()
     
     return render_to_response('run.html', data, context_instance = RequestContext(request))
 
-def view_run(request, run_id):
+def view_run(request, run_id, view):
     
     data = {}
     
@@ -80,6 +83,6 @@ def view_run(request, run_id):
     
     data['run'] = test_run
     data['groups'] = test_run.testgroup_set.all()
-    data['view'] = True
+    data['view'] = view
     
     return render_to_response('view_run.html', data, context_instance = RequestContext(request))

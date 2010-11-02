@@ -16,7 +16,8 @@
 
 <form action="." method="POST">
 {% csrf_token %}
-<input type="submit" value="View Run" />
+<input type="submit" value="View Run" name="view" />
+<input type="submit" value="Edit Run" name="edit" />
 </form>
 
 {% endblock %} 
