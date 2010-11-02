@@ -26,6 +26,18 @@ class SingleTest(models.Model):
     steps = models.TextField(blank = True, null = True)
     expected_results = models.TextField(blank = True, null = True)
     automated_test_id = models.TextField(blank = True, null = True)
+    actual_result = models.TextField(blank = True, null = True)
+    passed = models.NullBooleanField(blank = True, null = True)
+    
+    def get_status_as_string(self):
+        """ Used in template to work around broken if tag behaviour with nullbooleanfields """
+        
+        if self.passed == True:
+            return 'True'
+        elif self.passed == False:
+            return 'False'
+        else:
+            return 'None'
 
 
     

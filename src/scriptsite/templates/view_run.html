@@ -3,6 +3,8 @@
 {% block content %}
 
 <form action="." method="POST">
+{% csrf_token %}
+
 {% for group in groups %}
     <h2>{{ group.name }}</h2>
     <table>
@@ -30,9 +32,10 @@
             <td>{{ test.automated_test_id }}</td>
             {% endif %}
             {% if not view %}
-            <td><input name="{{group.name}}-{{test.name}}" type="text" /></td>
+            <td><input name="{{group.name}}/{{test.name}}/actual" type="text" value="{{ test.actual_result }}"/></td>
             <td>
-                <input type="radio" name="passfail" value="pass" /> Pass <input type="radio" name="passfail" value="fail" /> Fail
+                <input type="radio" name="{{group.name}}/{{test.name}}/passfail" value="pass" {% if test.get_status_as_string == 'True' %}checked{% endif %}/>Pass 
+                <input type="radio" name="{{group.name}}/{{test.name}}/passfail" value="fail" {% if test.get_status_as_string == 'False' %}checked{% endif %}/>Fail
             </td>
             {% endif %}
         </tr>
