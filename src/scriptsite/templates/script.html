@@ -3,10 +3,12 @@
 {% block content %}
 
 {{ script.script_file }}
+{{ script.date_uploaded }}
 {{ num_tests }}
 
 <div>
 <form action="." method="POST">
+    {% csrf_token %} 
     <input type="submit" value="Create Test Run" />
 </form>
 </div>

@@ -2,9 +2,13 @@
 
 {% block content %}
 
+    <div>
+        <p><a href="/upload/">Upload new test script<a/></p>
+    </div>
+
     <ul>
     {% for script in scripts %}
-        <li><a href="{{ script.id }}">{{ script.script_file.name }}</a></li>
+        <li><a href="{{ script.id }}/">{{ script.script_file.name }}</a></li>
     {% endfor %}
     </ul>
 

@@ -6,7 +6,7 @@ from django.core.urlresolvers import reverse
 from scriptsite.main.forms import ScriptForm
 from scriptsite.main.models import TestScript
 
-from scriptsite.main.xml_analysis import get_number_of_tests
+from scriptsite.main.xml_analysis import get_number_of_tests, convert_script_to_models
 
 def upload(request):
     data = {}
@@ -17,6 +17,7 @@ def upload(request):
     if request.method == 'POST':
         form = ScriptForm(request.POST, request.FILES)
         form.save()
+        return HttpResponseRedirect(reverse('script', kwargs = {'script_id':form.instance.id}))
         
     
     return render_to_response('upload.html', data, context_instance = RequestContext(request))
@@ -30,7 +31,7 @@ def script_home(request):
 
 def script(request, script_id):
     data = {}
-    
+           
     try:
         script = TestScript.objects.get(id = script_id)
         data['script'] = script
@@ -38,6 +39,7 @@ def script(request, script_id):
     except:
         return HttpResponseRedirect(reverse('script_home'))
     
-    
-    
+    if request.method == 'POST':
+        convert_script_to_models(script)
+      
     return render_to_response('script.html', data, context_instance = RequestContext(request))
