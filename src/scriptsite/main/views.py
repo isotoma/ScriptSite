@@ -70,4 +70,16 @@ def test_run(request, run_id):
     return render_to_response('run.html', data, context_instance = RequestContext(request))
 
 def view_run(request, run_id):
-    return HttpResponse('foo')
+    
+    data = {}
+    
+    try:
+        test_run = TestRun.objects.get(id = run_id)
+    except:
+        return HttpResponseRedirect(reverse('test_run_home'))
+    
+    data['run'] = test_run
+    data['groups'] = test_run.testgroup_set.all()
+    data['view'] = True
+    
+    return render_to_response('view_run.html', data, context_instance = RequestContext(request))

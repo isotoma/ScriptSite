@@ -1,6 +1,14 @@
 <html>
 
     <body>
+    
+        <div id="nav">
+                <ul>
+                        <li><a href="{% url upload %}">Upload Script</a></li>
+                        <li><a href="{% url script_home %}">View Scripts</a></li>
+                        <li><a href="{% url test_run_home %}">View Test Runs</a></li>
+                </ul>
+        </div>
 
         {% block content %}
         {% endblock %}
