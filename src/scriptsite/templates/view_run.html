@@ -2,6 +2,7 @@
 
 {% block content %}
 
+<form action="." method="POST">
 {% for group in groups %}
     <h2>{{ group.name }}</h2>
     <table>
@@ -10,17 +11,37 @@
             <th>Story ID</th>
             <th>Test Steps</th>
             <th>Expected Result</th>
+            {% if view %}
             <th>Automated Test ID</th>
+            {% endif %}
+            {% if not view %}
+            <th>Actual Result</th>
+            <th>Pass / Fail</th>
+            {% endif %}
+            
         </thead>
     {% for test in  group.singletest_set.all %}
         <tr>
             <td>{{ test.name }}</td>
             <td>{{ test.story_id }}</td>
-            <td>{{ test.steps }}</td>
+            <td>{{ test.steps|linebreaksbr }}</td>
             <td>{{ test.expected_results }}</td>
+            {% if view %}
             <td>{{ test.automated_test_id }}</td>
+            {% endif %}
+            {% if not view %}
+            <td><input name="{{group.name}}-{{test.name}}" type="text" /></td>
+            <td>
+                <input type="radio" name="passfail" value="pass" /> Pass <input type="radio" name="passfail" value="fail" /> Fail
+            </td>
+            {% endif %}
         </tr>
     {% endfor %}
     </table>
 {% endfor %}
+
+{% if not view %}
+<input type="submit" value="Save" />
+{% endif %}
+</form>
 {% endblock %}

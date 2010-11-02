@@ -22,7 +22,7 @@ def convert_script_to_models(script):
     """ Explode the incoming xml file into database models and save them """
     
     def get_value(element, value):
-        if element.find(value) is not None:
+        if element.find(value) is not None and element.find(value).text:
             return element.find(value).text
         return None
 
