@@ -9,10 +9,11 @@ from django.core.urlresolvers import reverse
 
 import ho.pisa as pisa
 
-from scriptsite.main.forms import ScriptForm
+from scriptsite.main.forms import ScriptForm, SubversionForm
 from scriptsite.main.models import TestScript, TestRun, SingleTest
 
 from scriptsite.main.xml_analysis import get_number_of_tests, convert_script_to_models
+from scriptsite.main.subversion import get_from_subversion
 
 def upload(request):
     data = {}
@@ -20,12 +21,24 @@ def upload(request):
     form = ScriptForm()
     data['form'] = form
     
-    if request.method == 'POST':
-        form = ScriptForm(request.POST, request.FILES)
-        form.save()
-        return HttpResponseRedirect(reverse('script', kwargs = {'script_id':form.instance.id}))
-        
+    subversion_form = SubversionForm()
+    data['subversion_form'] = subversion_form
     
+    if request.method == 'POST':
+        if request.POST.get('upload', None):
+            form = ScriptForm(request.POST, request.FILES)
+            form.save()
+            return HttpResponseRedirect(reverse('script', kwargs = {'script_id':form.instance.id}))
+        if request.POST.get('subversion', None):
+            subversion_form = SubversionForm(request.POST)
+            if subversion_form.is_valid():
+                script = get_from_subversion(subversion_form.cleaned_data['subversion_url'], 
+                                    subversion_form.cleaned_data['revision_number'], 
+                                    subversion_form.cleaned_data['username'], 
+                                    subversion_form.cleaned_data['password'])
+                return HttpResponseRedirect(reverse('script', kwargs = {'script_id': script.id}))
+            data['subversion_form'] = subversion_form
+        
     return render_to_response('upload.html', data, context_instance = RequestContext(request))
 
 def script_home(request):
