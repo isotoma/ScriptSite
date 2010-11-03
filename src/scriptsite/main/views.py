@@ -35,7 +35,8 @@ def upload(request):
                 script = get_from_subversion(subversion_form.cleaned_data['subversion_url'], 
                                     subversion_form.cleaned_data['revision_number'], 
                                     subversion_form.cleaned_data['username'], 
-                                    subversion_form.cleaned_data['password'])
+                                    subversion_form.cleaned_data['password'],
+                                    subversion_form.cleaned_data['flavour'])
                 return HttpResponseRedirect(reverse('script', kwargs = {'script_id': script.id}))
             data['subversion_form'] = subversion_form
         

@@ -12,3 +12,4 @@ class SubversionForm(forms.Form):
     revision_number = forms.CharField(max_length = 20)
     username = forms.CharField(max_length = 50)
     password = forms.CharField(widget = forms.PasswordInput)
+    flavour = forms.CharField(max_length = 20)
