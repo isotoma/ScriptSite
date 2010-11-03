@@ -66,6 +66,8 @@ def test_run(request, run_id):
             return HttpResponseRedirect(reverse('view_run', kwargs = {'run_id': test_run.id}))
         if request.POST.get('edit', None):
             return HttpResponseRedirect(reverse('edit_run', kwargs = {'run_id': test_run.id}))
+        if request.POST.get('download', None):
+            return HttpResponseRedirect(reverse('download_run', kwargs = {'run_id': test_run.id}))
     
     data['run'] = test_run
     data['groups'] = test_run.testgroup_set.all()
@@ -120,3 +122,13 @@ def update_data(data, test_run):
                 test.pased = None
         
         test.save()
+        
+def download_run(request, run_id):
+    
+    data = {}
+    try:
+        test_run = TestRun.objects.get(id = run_id)
+    except:
+        return HttpResponseRedirect(reverse('test_run_home'))
+    
+    
