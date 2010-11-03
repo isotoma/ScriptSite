@@ -40,5 +40,13 @@ class SingleTest(models.Model):
         else:
             return 'None'
 
+    def get_status_as_friendly_string(self):
+        """ Turn True/False into Pass/Fail """
+        if self.passed:
+            return "Pass"
+        elif self.passed == False:
+            return "Fail"
+        else:
+            return None
 
     

@@ -116,7 +116,7 @@
 				<td class="steps">{{ test.steps }}</td>
 				<td class="expected_result" width="200">{{ test.expected_results }}</td>
 				<td>{% if test.actual_result %}{{ test.actual_result }}{% endif %}</td>
-				<td width="50">{% if test.get_status_as_string != 'None' %} {{test.passed }} {% endif %}</td>
+				<td width="50">{% if test.get_status_as_string != 'None' %} {{test.get_status_as_friendly_string }} {% endif %}</td>
 			</tr>
 			{% endfor %}
 		</table>

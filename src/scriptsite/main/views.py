@@ -111,14 +111,21 @@ def view_run(request, run_id, view):
 
 def update_data(data, test_run):
     for d in data.iteritems():
+        
         split = d[0].split('/')
         if len(split) < 3: 
-            return 
+            continue 
+
         group = test_run.testgroup_set.get(name = split[0])
         test = group.singletest_set.get(name = split[1])
         
+        
+        
         if split[2] == 'actual':
-            test.actual_result = d[1]
+            if d[1] and d[1] != 'None':
+                test.actual_result = d[1]
+            else:
+                test.actual_result = ""
             
         if split[2] == 'passfail':
             if d[1] == 'pass':
@@ -126,7 +133,7 @@ def update_data(data, test_run):
             elif d[1] == 'fail':
                 test.passed = False
             else:
-                test.pased = None
+                test.passed = None
         
         test.save()
         
