@@ -29,6 +29,11 @@ def convert_script_to_models(script):
     # get the xml doc from the script
     xml_doc = get_xml_doc(script.script_file.path)
     
+    # save the flavour (country) of the test document
+    script.flavour = xml_doc.attrib['flavour']
+    script.save()
+    
+    # create the test run
     test_run = TestRun()
     test_run.date_started = datetime.now()
     test_run.test_script = script

@@ -6,6 +6,7 @@ class TestScript(models.Model):
     revision = models.CharField(max_length = 15)
     script_file = models.FileField(upload_to='uploaded_scripts/%y%m%d%H%M%S/')
     date_uploaded = models.DateTimeField(default = datetime.now(), editable = False)
+    flavour = models.CharField(max_length = 20, editable = False, default = "NOTSET")
     
 class TestRun(models.Model):
     """ A particular test run, of a given script """

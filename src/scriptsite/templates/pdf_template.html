@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>{{ flavour }}</title>
+	<style type="text/css">
+	@page {
+		size: a4 landscape;
+		margin: 1cm;
+		@frame footer {
+			-pdf-frame-content: footerContent;
+			bottom: 0cm;
+			margin-left: 1cm;
+			margin-right: 1cm;
+			height: 1cm;
+		      }
+	}
+	
+	pdftoc {
+		color: #666;
+	    }
+	    pdftoc.pdftoclevel0 {
+		font-weight: bold;
+		margin-top: 0.5em;
+	    }
+	    pdftoc.pdftoclevel1 {
+		margin-left: 1em;
+	    }
+	    pdftoc.pdftoclevel2 {
+		margin-left: 2em;
+		font-style: italic;
+	    } 
+	    
+	body {
+		color: black;	
+	}
+	
+	td, th {
+		padding: 1px;	
+	}
+	
+	#header {
+		margin-bottom: 40px;	
+	}
+	
+	#header td {
+		padding: 10px;
+		border: 1px solid;
+	}
+	
+	#signature-sheet td {
+		padding: 10px;
+		border: 1px solid;
+	}
+
+	</style>
+</head>
+
+<body>
+
+	<div id="header">
+		<h1>{{ flavour }} Test Script</h1>
+		
+		<div id="cover_sheet">
+			<span id="generation_time">Test Script created at {{ generation_time }}</span>
+			<table border="1">
+				<tr>
+					<td>Version of test script</td>
+					<td width="500" border="1">{{ script_revision }}
+				</tr>
+				<tr>
+					<td>Version of software under test</td>
+					<td width="500" border="1">&nbsp;</td>
+				</tr>
+				<tr>
+					<td>Test Environment</td>
+					<td width="500">&nbsp;</td>
+				</tr>
+				<tr>
+					<td>Browser and Version</td>
+					<td width="500">&nbsp;</td>
+				</tr>
+				<tr>
+					<td>Trac Milestone</td>
+					<td width="500">&nbsp;</td>
+				</tr>
+			</table>
+			<span class="signature">Lead Developer Pre Approval</span>
+			<table border="1">
+				<tr>
+					<td>Lead Developer Signature</td>
+					<td width="500">&nbsp;</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	
+	<div>
+		<pdf:toc />
+	</div>
+	
+	<pdf:nextpage />
+	
+	{% for test_group in test_run.testgroup_set.all %}
+	<div class="test_group">
+		<h2>{{ test_group.name }}</h2>
+		<table repeat="1" border="1">
+			<thead>
+				<th width="80">Test ID</th><th>Story ID</th><th>Steps</th><th>Expected Result</th><th>Actual Result</th><th>Pass / Fail</th>
+			</thead>
+			{% for test in test_group.singletest_set.all %}
+			<tr>
+				<td class="name" width="80">{{ test.name }}</td>
+				<td class="story_id" width="100">{{ test.story_id }}</td>
+				<td class="steps">{{ test.steps }}</td>
+				<td class="expected_result" width="200">{{ test.expected_results }}</td>
+				<td>{% if test.actual_result %}{{ test.actual_result }}{% endif %}</td>
+				<td width="50">{% if test.get_status_as_string != 'None' %} {{test.passed }} {% endif %}</td>
+			</tr>
+			{% endfor %}
+		</table>
+	</div>
+	<pdf:nextpage />
+	{% endfor %}
+
+	<div id="signature-sheet">
+		<h2>Signature sheet</h2>
+		<table>
+			<table border="1">
+				<tr>
+					<td>Test Executer</td>
+					<td width="500">&nbsp;</td>
+				</tr>
+				<tr>
+					<td>Test Reviewer</td>
+					<td width="500">&nbsp;</td>
+				</tr>
+			</table>
+		</table>
+	</div>
+	
+	<div id="footerContent">
+	Test script for {{ flavour }} page #<pdf:pagenumber>
+	</div>
+</body>
+</html>

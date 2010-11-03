@@ -1,7 +1,13 @@
+from datetime import datetime
+import cStringIO as StringIO
+
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
-from django.template import RequestContext
+from django.template import RequestContext, Context
+from django.template.loader import get_template
 from django.core.urlresolvers import reverse
+
+import ho.pisa as pisa
 
 from scriptsite.main.forms import ScriptForm
 from scriptsite.main.models import TestScript, TestRun, SingleTest
@@ -80,6 +86,7 @@ def test_run(request, run_id):
     data['failed'] = failed
     data['incomplete'] = incomplete
     
+    data['flavour'] = test_run.test_script.flavour
     
     return render_to_response('run.html', data, context_instance = RequestContext(request))
 
@@ -124,11 +131,27 @@ def update_data(data, test_run):
         test.save()
         
 def download_run(request, run_id):
+    """ Convert a run to PDF in memory and send it to the client """
     
-    data = {}
     try:
         test_run = TestRun.objects.get(id = run_id)
     except:
         return HttpResponseRedirect(reverse('test_run_home'))
     
+    template_data = {}
+    template_data['flavour'] = test_run.test_script.flavour
+    template_data['generation_time'] = datetime.now()
+    template_data['script_revision'] = test_run.test_script.revision
+    template_data['test_run'] = test_run
+    
+    template = get_template('pdf_template.html')
+    context = Context(template_data)
+    html = template.render(context)
+    result = StringIO.StringIO()
+    
+    pdf = pisa.CreatePDF(html, result)
+    if not pdf.err:
+        return HttpResponse(result.getvalue(), mimetype = 'application/pdf')
+    
+    return HttpResponse('foo')
     

@@ -4,6 +4,7 @@
 
 <h3>Run Statistics</h3>
 <p>Created: {{ run.date_started }}</p>
+<p>Flavour: {{ flavour }} </p>
 <p>Passed: {{ passed }}</p>
 <p>Failed: {{ failed }}</p>
 <p>Incomplete: {{ incomplete }}</p>
@@ -19,6 +20,7 @@
 {% csrf_token %}
 <input type="submit" value="View Run" name="view" />
 <input type="submit" value="Edit Run" name="edit" />
+<input type="submit" value="Download Run" name="download" />
 </form>
 
 {% endblock %} 
