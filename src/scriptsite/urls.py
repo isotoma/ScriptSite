@@ -16,7 +16,7 @@ from django.template.loader import render_to_string
 from django.contrib import admin
 admin.autodiscover()
 
-from scriptsite.main.views import script, script_home, upload, test_run, test_run_home, view_run
+from scriptsite.main.views import script, script_home, upload, test_run, test_run_home, view_run, download_run
 
 urlpatterns = patterns('',
 
