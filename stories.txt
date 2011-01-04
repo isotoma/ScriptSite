@@ -1,0 +1,15 @@
+TM = Test Manager
+LD = Lead Developer
+TT = Tester
+
+As a TM I should be able to create a test script from an XML document
+As a TM I should be able to create a test script from an SVN repository
+As a LD I should be able to review a test script
+As a TM I should be able to create a Test Run from a Test Script
+As a LD I should be able to review a Test Run
+As a TT I should be able to complete a Test Run, marking Pass / Fail and comments as I progress
+As a TM I should be able to see progress of a Test Run
+As a LD I should be able to see progress of a Test Run
+As a TT I should be able to leave a Test Run and complete it later
+As a TM I should be able to download a completed Test Run in PDF form
+As a LD I should be able to download a completed Test Run in PDF form
