@@ -16,8 +16,9 @@ from scriptsite.main.xml_analysis import get_number_of_tests, convert_script_to_
 from scriptsite.main.subversion import get_from_subversion
 
 
-@permission_required('main.test_script.can_create', login_url=reverse('login'))
+@permission_required('main.test_script.can_create')
 def upload(request):
+    
     data = {}
     
     form = ScriptForm()

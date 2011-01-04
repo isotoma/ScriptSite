@@ -109,6 +109,8 @@ DEVSERVER_MODULES = (
 
 ROOT_URLCONF = 'scriptsite.urls'
 
+LOGIN_URL = '/login/'
+
 # Override with environment specific settings
 try:
     from local_settings import *
