@@ -12,6 +12,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.http import HttpResponseNotFound, HttpResponseServerError
 from django.template.loader import render_to_string
 
+from django.contrib.auth.views import login, logout
+
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
@@ -46,6 +48,9 @@ urlpatterns = patterns('',
     url(r'testrun/(?P<run_id>\d+)/$', test_run, name = 'test_run'),
     url(r'testrun/', test_run_home, name = 'test_run_home'),
     url(r'^upload/', upload, name = 'upload'),
+
+    url(r'^login/', login, name = 'login'),
+    url(r'^logout/', logout, name = 'logout'),
     
 )
 

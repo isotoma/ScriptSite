@@ -8,6 +8,9 @@
                         <li><a href="{% url script_home %}">View Scripts</a></li>
                         <li><a href="{% url test_run_home %}">View Test Runs</a></li>
                 </ul>
+		{% if user.is_authenticated %}
+		<span><a href="{% url logout %}">Logout</a></span>
+		{% endif %}
         </div>
 
         {% block content %}

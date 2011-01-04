@@ -6,15 +6,17 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext, Context
 from django.template.loader import get_template
 from django.core.urlresolvers import reverse
+from django.contrib.auth.decorators import login_required, permission_required
 
 import ho.pisa as pisa
 
 from scriptsite.main.forms import ScriptForm, SubversionForm
 from scriptsite.main.models import TestScript, TestRun, SingleTest
-
 from scriptsite.main.xml_analysis import get_number_of_tests, convert_script_to_models
 from scriptsite.main.subversion import get_from_subversion
 
+
+@permission_required('main.test_script.can_create', login_url=reverse('login'))
 def upload(request):
     data = {}
     
