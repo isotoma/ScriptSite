@@ -8,6 +8,13 @@ class TestScript(models.Model):
     date_uploaded = models.DateTimeField(default = datetime.now(), editable = False)
     flavour = models.CharField(max_length = 20, editable = False, default = "NOTSET")
     
+    approved = models.BooleanField(default = False)
+    
+    class Meta:
+        permissions = (
+            ('can_approve', 'Can approve a test script'),
+        )
+    
 class TestRun(models.Model):
     """ A particular test run, of a given script """
     date_started = models.DateTimeField()

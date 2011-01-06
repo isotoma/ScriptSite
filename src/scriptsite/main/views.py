@@ -70,14 +70,19 @@ def script(request, script_id):
         script = TestScript.objects.get(id = script_id)
         data['script'] = script
         data['num_tests'] = get_number_of_tests(script)
+        data['can_approve'] = request.user.has_perm('main.testscript.can_approve')
     except:
         return HttpResponseRedirect(reverse('script_home'))
     
     if request.method == 'POST':
         # check if the user can do this
-        if request.user.has_perm('main.add_testrun'):
+        if request.user.has_perm('main.add_testrun') and request.POST.get('create', None):
             test_run = convert_script_to_models(script)
             return HttpResponseRedirect(reverse('test_run', kwargs = {'run_id': test_run.id}))
+        if request.user.has_perm('main.testscript.can_approve') and request.POST.get('approve', None):
+            script.approved = True
+            script.save()
+
       
     return render_to_response('script.html', data, context_instance = RequestContext(request))
 
