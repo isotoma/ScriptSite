@@ -51,6 +51,8 @@ def upload(request):
                                     subversion_form.cleaned_data['username'], 
                                     subversion_form.cleaned_data['password'],
                                     subversion_form.cleaned_data['flavour'])
+                script.upload_user = request.user
+                script.save()
                 return HttpResponseRedirect(reverse('script', kwargs = {'script_id': script.id}))
             data['subversion_form'] = subversion_form
         
