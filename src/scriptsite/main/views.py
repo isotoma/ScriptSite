@@ -85,6 +85,7 @@ def script(request, script_id):
             return HttpResponseRedirect(reverse('test_run', kwargs = {'run_id': test_run.id}))
         if request.user.has_perm('main.testscript.can_approve') and request.POST.get('approve', None):
             script.approved = True
+            script.approved_user = request.user
             script.save()
 
       
