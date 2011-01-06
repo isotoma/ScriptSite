@@ -54,7 +54,7 @@ def upload(request):
         
     return render_to_response('upload.html', data, context_instance = RequestContext(request))
 
-@permission_required('main.change_testscript')
+@login_required
 def script_home(request):
     data = {}
     
@@ -62,7 +62,7 @@ def script_home(request):
     
     return render_to_response('script_home.html', data, context_instance = RequestContext(request))
 
-@permission_required('main.test_script.can_create')
+@permission_required('main.change_testscript')
 def script(request, script_id):
     data = {}
            
@@ -74,11 +74,14 @@ def script(request, script_id):
         return HttpResponseRedirect(reverse('script_home'))
     
     if request.method == 'POST':
-        test_run = convert_script_to_models(script)
-        return HttpResponseRedirect(reverse('test_run', kwargs = {'run_id': test_run.id}))
+        # check if the user can do this
+        if request.user.has_perm('main.add_testrun'):
+            test_run = convert_script_to_models(script)
+            return HttpResponseRedirect(reverse('test_run', kwargs = {'run_id': test_run.id}))
       
     return render_to_response('script.html', data, context_instance = RequestContext(request))
 
+@login_required
 def test_run_home(request):
     data = {}
     
@@ -86,6 +89,7 @@ def test_run_home(request):
     
     return render_to_response('run_home.html', data, context_instance = RequestContext(request))
 
+@login_required
 def test_run(request, run_id):
     
     data = {}
@@ -99,7 +103,8 @@ def test_run(request, run_id):
         if request.POST.get('view', None):
             return HttpResponseRedirect(reverse('view_run', kwargs = {'run_id': test_run.id}))
         if request.POST.get('edit', None):
-            return HttpResponseRedirect(reverse('edit_run', kwargs = {'run_id': test_run.id}))
+            if request.user.has_perm('main.change_testrun'):
+                return HttpResponseRedirect(reverse('edit_run', kwargs = {'run_id': test_run.id}))
         if request.POST.get('download', None):
             return HttpResponseRedirect(reverse('download_run', kwargs = {'run_id': test_run.id}))
     
@@ -118,6 +123,7 @@ def test_run(request, run_id):
     
     return render_to_response('run.html', data, context_instance = RequestContext(request))
 
+@login_required
 def view_run(request, run_id, view):
     
     data = {}
@@ -128,8 +134,9 @@ def view_run(request, run_id, view):
         return HttpResponseRedirect(reverse('test_run_home'))
     
     if request.method == 'POST':
-        update_data(request.POST, test_run)
-        return HttpResponseRedirect(reverse('test_run', kwargs={'run_id': run_id}));
+        if request.user.has_perm('main.change_testrun'):
+            update_data(request.POST, test_run)
+            return HttpResponseRedirect(reverse('test_run', kwargs={'run_id': run_id}));
     
     data['run'] = test_run
     data['groups'] = test_run.testgroup_set.all()
@@ -165,6 +172,7 @@ def update_data(data, test_run):
         
         test.save()
         
+@login_required
 def download_run(request, run_id):
     """ Convert a run to PDF in memory and send it to the client """
     
