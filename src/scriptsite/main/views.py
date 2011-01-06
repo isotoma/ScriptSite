@@ -19,7 +19,7 @@ def home(request):
     
     return render_to_response('home.html', {}, context_instance = RequestContext(request))
 
-@permission_required('main.test_script.can_create')
+@permission_required('main.add_testscript')
 def upload(request):
     
     data = {}
@@ -33,8 +33,14 @@ def upload(request):
     if request.method == 'POST':
         if request.POST.get('upload', None):
             form = ScriptForm(request.POST, request.FILES)
-            form.save()
-            return HttpResponseRedirect(reverse('script', kwargs = {'script_id':form.instance.id}))
+            
+            # if we have a valid form, save it and go to the created script
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect(reverse('script', kwargs = {'script_id':form.instance.id}))
+            
+            # if it's not, we need to display some validation errors
+            data['form'] = form
         if request.POST.get('subversion', None):
             subversion_form = SubversionForm(request.POST)
             if subversion_form.is_valid():
@@ -48,6 +54,7 @@ def upload(request):
         
     return render_to_response('upload.html', data, context_instance = RequestContext(request))
 
+@permission_required('main.change_testscript')
 def script_home(request):
     data = {}
     
@@ -55,6 +62,7 @@ def script_home(request):
     
     return render_to_response('script_home.html', data, context_instance = RequestContext(request))
 
+@permission_required('main.test_script.can_create')
 def script(request, script_id):
     data = {}
            

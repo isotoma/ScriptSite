@@ -102,9 +102,9 @@ DEVSERVER_MODULES = (
     'devserver.modules.profile.ProfileSummaryModule',
 
     # Modules not enabled by default
-    'devserver.modules.ajax.AjaxDumpModule',
-    'devserver.modules.profile.MemoryUseModule',
-    'devserver.modules.cache.CacheSummaryModule',
+    #'devserver.modules.ajax.AjaxDumpModule',
+    #'devserver.modules.profile.MemoryUseModule',
+    #'devserver.modules.cache.CacheSummaryModule',
 )
 
 ROOT_URLCONF = 'scriptsite.urls'
