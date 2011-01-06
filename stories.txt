@@ -4,8 +4,9 @@ TT = Tester
 
 As a TM I should be able to create a test script from an XML document
 As a TM I should be able to create a test script from an SVN repository
-As a LD I should be able to review a test script
-As a TM I should be able to create a Test Run from a Test Script
+As a LD I should be able to review a test script and approve it before a Test Run can be created
+As a LD I should be able to assign software versions to run a Test Script against, which will become part of the Test Run
+As a TM I should be able to create a Test Run from an approved Test Script
 As a LD I should be able to review a Test Run
 As a TT I should be able to complete a Test Run, marking Pass / Fail and comments as I progress
 As a TM I should be able to see progress of a Test Run
