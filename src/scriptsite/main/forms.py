@@ -5,6 +5,7 @@ from scriptsite.main.models import TestScript
 class ScriptForm(forms.ModelForm):
     class Meta:
         model = TestScript
+        exclude = ('approved', 'upload_user', 'approved_user')
         
 class SubversionForm(forms.Form):
     """ Subversion connection / retrieval details """

@@ -1,6 +1,8 @@
 from django.db import models
 from datetime import datetime
 
+from django.contrib.auth.models import User
+
 class TestScript(models.Model):
     """ A Test script document """
     revision = models.CharField(max_length = 15)
@@ -9,6 +11,8 @@ class TestScript(models.Model):
     flavour = models.CharField(max_length = 20, editable = False, default = "NOTSET")
     
     approved = models.BooleanField(default = False)
+    upload_user = models.ForeignKey(User, related_name = "upload_user", blank=True, null=True)
+    approved_user = models.ForeignKey(User, related_name = "approved_user", blank=True, null=True)
     
     class Meta:
         permissions = (

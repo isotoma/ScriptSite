@@ -37,6 +37,8 @@ def upload(request):
             # if we have a valid form, save it and go to the created script
             if form.is_valid():
                 form.save()
+                form.instance.upload_user = request.user
+                form.instance.save()
                 return HttpResponseRedirect(reverse('script', kwargs = {'script_id':form.instance.id}))
             
             # if it's not, we need to display some validation errors
