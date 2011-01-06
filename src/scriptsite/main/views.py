@@ -15,6 +15,9 @@ from scriptsite.main.models import TestScript, TestRun, SingleTest
 from scriptsite.main.xml_analysis import get_number_of_tests, convert_script_to_models
 from scriptsite.main.subversion import get_from_subversion
 
+def home(request):
+    
+    return render_to_response('home.html', {}, context_instance = RequestContext(request))
 
 @permission_required('main.test_script.can_create')
 def upload(request):
