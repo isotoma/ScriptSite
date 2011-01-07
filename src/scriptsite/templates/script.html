@@ -17,12 +17,20 @@
     {% if script.approved %}
     <input type="submit" value="Create Test Run" name="create" />
     {% endif %}
-    {% if can_approve %}
-    {% if not script.approved %}
-    <input type="submit" value="Approve Test Run" name="approve" />
-    {% endif %}
-    {% endif %}
 </form>
+
+{% if can_approve %}
+{% if not script.approved %}
+<form action="." method="POST">
+    {% csrf_token %}
+    
+    {{ approval_form }}
+    <input type="submit" value="Approve Test Run" name="approve" />
+
+</form>
+
+{% endif %}
+{% endif %}
 </div>
 
 {% endblock %}

@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 
 import ho.pisa as pisa
 
-from scriptsite.main.forms import ScriptForm, SubversionForm
+from scriptsite.main.forms import ScriptForm, SubversionForm, ScriptReviewForm
 from scriptsite.main.models import TestScript, TestRun, SingleTest
 from scriptsite.main.xml_analysis import get_number_of_tests, convert_script_to_models
 from scriptsite.main.subversion import get_from_subversion
@@ -75,6 +75,8 @@ def script(request, script_id):
         data['script'] = script
         data['num_tests'] = get_number_of_tests(script)
         data['can_approve'] = request.user.has_perm('main.testscript.can_approve')
+        
+        data['approval_form'] = ScriptReviewForm()
     except:
         return HttpResponseRedirect(reverse('script_home'))
     
@@ -84,9 +86,14 @@ def script(request, script_id):
             test_run = convert_script_to_models(script)
             return HttpResponseRedirect(reverse('test_run', kwargs = {'run_id': test_run.id}))
         if request.user.has_perm('main.testscript.can_approve') and request.POST.get('approve', None):
-            script.approved = True
-            script.approved_user = request.user
-            script.save()
+            approval_form = ScriptReviewForm(request.POST)
+            if approval_form.is_valid():
+                script.version_of_software = approval_form.cleaned_data['version_of_software']
+                script.software_environment = approval_form.cleaned_data['software_environment']
+                script.approved = True
+                script.approved_user = request.user
+                script.save()
+            data['approval_form'] = approval_form
 
       
     return render_to_response('script.html', data, context_instance = RequestContext(request))

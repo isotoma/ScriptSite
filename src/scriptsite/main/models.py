@@ -14,6 +14,9 @@ class TestScript(models.Model):
     upload_user = models.ForeignKey(User, related_name = "upload_user", blank=True, null=True)
     approved_user = models.ForeignKey(User, related_name = "approved_user", blank=True, null=True)
     
+    version_of_software = models.TextField(blank = True, null = True)
+    software_environment = models.TextField(blank = True, null = True)
+    
     class Meta:
         permissions = (
             ('can_approve', 'Can approve a test script'),
