@@ -4,9 +4,9 @@
     
         <div id="nav">
                 <ul>
-                        <li><a href="{% url upload %}">Upload Script</a></li>
-                        <li><a href="{% url script_home %}">View Scripts</a></li>
-                        <li><a href="{% url test_run_home %}">View Test Runs</a></li>
+                        <li{% if active == 'upload' %} class='active' {% endif %}><a href="{% url upload %}">Upload Script</a></li>
+                        <li{% if active == 'script' %} class='active' {% endif %}><a href="{% url script_home %}">View Scripts</a></li>
+                        <li{% if active == 'run' %} class='active' {% endif %}><a href="{% url test_run_home %}">View Test Runs</a></li>
                 </ul>
 		{% if user.is_authenticated %}
 		<span><a href="{% url logout %}">Logout</a></span>
