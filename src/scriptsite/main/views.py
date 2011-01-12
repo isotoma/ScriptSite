@@ -26,7 +26,6 @@ def upload(request):
     
     form = ScriptForm()
     data['form'] = form
-    data['active'] = 'upload'
     
     subversion_form = SubversionForm()
     data['subversion_form'] = subversion_form
@@ -63,7 +62,6 @@ def upload(request):
 def script_home(request):
     data = {}
     
-    data['active'] = 'script'
     data['scripts'] = TestScript.objects.all()
     
     return render_to_response('script_home.html', data, context_instance = RequestContext(request))
@@ -71,8 +69,6 @@ def script_home(request):
 @permission_required('main.change_testscript')
 def script(request, script_id):
     data = {}
-    
-    data['active'] = 'script'
            
     try:
         script = TestScript.objects.get(id = script_id)
@@ -106,7 +102,6 @@ def script(request, script_id):
 def test_run_home(request):
     data = {}
     
-    data['active'] = 'run'
     data['runs'] = TestRun.objects.all()
     
     return render_to_response('run_home.html', data, context_instance = RequestContext(request))
@@ -115,7 +110,6 @@ def test_run_home(request):
 def test_run(request, run_id):
     
     data = {}
-    data['active'] = 'run'
     
     try:
         test_run = TestRun.objects.get(id = run_id)

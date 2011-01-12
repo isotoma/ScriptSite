@@ -1,0 +1,38 @@
+/*
+-----------------------------------------------
+Isotoma Template stylesheet: Print
+----------------------------------------------- */
+* {
+    background: transparent !important;
+    color: #444 !important;
+    text-shadow: none;
+}
+A, A:visited {
+    color: #444 !important;
+    text-decoration: underline;
+}
+A:after {
+    content: " (" attr(href) ")";
+}
+ABBR:after {
+    content: " (" attr(title) ")";
+}
+.ir A:after {
+    content: "";
+}
+/* Don't show links for images */
+PRE, BLOCKQUOTE {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+}
+IMG {
+    page-break-inside: avoid;
+}
+@page { margin: 0.5cm; }
+P, H2, H3 {
+    orphans: 3;
+    widows: 3;
+}
+H2, H3 {
+    page-break-after: avoid;
+}

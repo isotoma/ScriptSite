@@ -1,0 +1,257 @@
+@import url("utility.css");
+/*
+-----------------------------------------------
+Isotoma Template Layout One stylesheet: Screen
+----------------------------------------------- */
+.border {
+  border: 1px solid #f00;
+}
+/* @group layout */
+#canvas {
+  margin: 32px;
+  min-width: 472px;
+}
+#main {
+  position: relative;
+  min-height: 320px;
+}
+#content {
+  padding: 8px;
+}
+#aside {
+  float: left;
+}
+#header {
+  display: block;
+  position: relative;
+}
+.container {
+  margin: 0 8px;
+}
+/* @end */
+/* @group tables */
+TABLE {
+  margin: 16px 8px;
+  border-collapse: collapse;
+}
+/* @end */
+/* @group aside  */
+#aside .container {
+  margin-top: 0;
+}
+#aside H2 {
+  margin: 0 0 8px 0;
+  padding-top: 8px;
+}
+#aside H3 {
+  margin: 8px 0;
+  padding-top: 8px;
+}
+#aside P {
+  margin: 8px 0;
+  padding-right: 8px;
+}
+.box {
+  margin: 8px 0;
+}
+#aside .box H2 {
+  padding: 0;
+  border: none;
+}
+/* @end */
+/* @group header */
+#header {
+  min-height: 80px;
+}
+#logo {
+  display: block;
+  border: #e00 solid 10px;
+  border-width: 8px 10px;
+  float: left;
+}
+#site-tools {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  padding: 4px;
+  z-index: 1000;
+}
+#site-tools LI {
+  padding: 0;
+  list-style: none;
+  float: left;
+}
+#site-tools LI A {
+  float: left;
+  display: block;
+  padding: 8px;
+}
+#logout {
+  position: absolute;
+  right: 10px;
+  top: 0;
+}
+#logout A {
+  display: block;
+  padding: 8px;
+}
+#header H1 {
+  float: left;
+  padding: 16px;
+}
+/* @end */
+/* @group footer    */
+#footer {
+  clear: both;
+  display: block;
+  position: relative;
+  padding: 32px;
+}
+.footer-columms {
+  width: 640px;
+}
+.footer-columms UL {
+  margin: 0;
+  padding: 0;
+}
+.footer-columms LI {
+  float: left;
+  width: 304px;
+  padding: 8px;
+}
+/* @end */
+/* @group nav */
+#nav UL, #nav LI {
+  list-style: none;
+  float: left;
+}
+#nav A {
+  float: left;
+  display: block;
+  padding: 8px;
+  margin-right: 1px;
+}
+/* @end */
+/* @group main */
+.column {
+  width: 224px;
+  float: left;
+}
+/* @end */
+/* @group messages */
+.error {
+  margin: 8px;
+  padding: 8px;
+}
+#content .errorlist {
+  margin: 2px 0;
+  padding: 0;
+}
+#content .errorlist LI {
+  list-style: none;
+  margin: 4px;
+  padding: 0;
+}
+/* @end */
+/* @group forms */
+#content .pageform H1,
+#content .pageform H2,
+#content .pageform H3,
+#content .pageform H4,
+#content .pageform H5 {
+  border: none;
+}
+.pageform {
+  padding: 16px;
+}
+FIELDSET {
+  margin: 16px 8px;
+  padding: 16px;
+}
+LABEL {
+  display: block;
+  margin: 4px 0 0 0;
+}
+TEXTAREA {
+  margin: 8px 0;
+  padding: 8px;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+SELECT {
+  margin: 4px;
+}
+INPUT {
+  margin: 4px 0;
+  padding: 4px;
+  vertical-align: top;
+}
+INPUT[type="text"], INPUT[type="password"] {
+  width: 208px;
+}
+.pageform .checkbox LABEL,
+.pageform .radio LABEL,
+.pageform .checkbox INPUT,
+.pageform .radio INPUT {
+  display: inline-block;
+  margin: 2px;
+}
+INPUT[type="submit"] {
+  display: block;
+  padding: 6px 8px;
+  margin: 8px 0;
+}
+INPUT[type="file"] {
+  width: 160px;
+  font-size: 87.4%;
+}
+/* @end */
+@media screen and (max-device-width: 640px) {
+  #canvas {
+    width: auto;
+    margin: 8px;
+  }
+  #main {
+    position: static;
+    padding-top: 0;
+  }
+  #site-tools {
+    display: none;
+  }
+  #site-tools UL, #site-tools LI, #site-tools LI A {
+    float: none;
+    width: auto;
+  }
+  #header {
+    height: auto !important;
+  }
+  #content {
+    float: none;
+    width: auto;
+  }
+  #site-tools {
+    position: static;
+  }
+  #nav .container {
+    width: auto;
+    position: static;
+  }
+  #aside {
+    float: none;
+    width: auto;
+  }
+  .fullwidth {
+    width: 274px;
+  }
+  TEXTAREA {
+    width: 224px !important;
+  }
+  .footer-columms {
+    width: auto;
+  }
+  .footer-columms LI {
+    float: none;
+    width: auto;
+    padding: 8px;
+  }
+}

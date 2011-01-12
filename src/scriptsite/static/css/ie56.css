@@ -1,0 +1,17 @@
+/*
+-----------------------------------------------
+Isotoma Template One stylesheet: IE56
+----------------------------------------------- */
+#main,
+#content,
+#nav,
+#aside,
+#canvas {
+	zoom: 1;
+}
+#header {
+	background-image: none !important;
+}
+/* Hides from IE-mac \*/
+* html .clearfix {height: 1%;}
+/* End hide from IE-mac */

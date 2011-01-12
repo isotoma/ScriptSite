@@ -92,8 +92,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.admin',
     'scriptsite.main',
-    'south',
-    'devserver'
+    'south'
 )
 
 DEVSERVER_MODULES = (

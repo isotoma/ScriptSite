@@ -1,0 +1,279 @@
+/*
+-----------------------------------------------
+Isotoma Template Layout One stylesheet: Screen
+----------------------------------------------- */
+@import url("utility.css");
+
+@margin : 8px;
+@nav_height: (@margin * 4);
+
+.border {
+	border: 1px solid #f00;
+}
+
+/* @group layout */
+#canvas {
+	margin: (@margin * 4);
+	min-width: @margin * 59;
+}
+#main {
+	position: relative;
+    min-height: @margin * 40;
+}
+#content {
+    padding: @margin;
+}
+#aside  {  
+	float: left;
+}
+#header {
+    display: block;
+    position: relative; 
+}
+.container {
+    margin: 0 @margin;
+}
+/* @end */
+
+/* @group tables */
+
+TABLE {
+	margin: (@margin * 2) @margin;
+    border-collapse: collapse;
+}
+.fullwidth {
+}
+
+/* @end */
+/* @group aside  */
+#aside .container {
+	margin-top: 0;
+}
+#aside H2 {
+    margin: 0 0 @margin 0;
+    padding-top: @margin;  
+}
+#aside H3 {
+    margin: @margin 0;  
+    padding-top: @margin;  
+}
+#aside P {
+    margin:  @margin 0;
+    padding-right: @margin;
+} 
+.box {
+    margin: @margin 0;
+}
+#aside .box H2 {
+    padding: 0;
+    border: none;
+}
+/* @end */
+/* @group header */
+#header {
+	min-height: @margin * 10;
+}
+#logo {
+   display: block;
+   border: #e00 solid 10px;
+   border-width: 8px 10px;
+   float: left;
+}
+#site-tools {
+    position: absolute;
+    right: @margin;
+    top:  @margin;  
+    padding: @margin / 2;  
+    z-index: 1000;
+}
+#site-tools LI {
+    padding: 0;
+    list-style: none;
+    float: left;
+}
+#site-tools LI A {
+	float: left;
+    display: block;
+    padding: @margin;
+}
+#logout {
+	position: absolute;
+	right: 10px;
+	top: 0;
+}
+#logout A {
+	display: block;
+	padding: @margin;
+}
+#header H1 {
+	float: left;
+	padding: @margin * 2;
+}
+/* @end */
+/* @group footer    */
+#footer    {
+    clear: both;
+    display: block;
+    position: relative;
+    padding: @margin * 4;
+}
+.footer-columms {
+   width: (@margin * 40) * 2;	   
+}
+.footer-columms UL {
+	margin:  0;
+	padding: 0;
+}
+.footer-columms LI {
+   float: left;
+   width: @margin * 38;	
+   padding: @margin;
+}
+
+/* @end */
+
+/* @group nav */
+#nav UL, #nav LI {
+   list-style: none;
+   float: left; 
+ 
+}
+#nav A {
+	float: left;
+    display: block;
+    padding: @margin;
+    margin-right: 1px;
+} 
+/* @end */
+
+/* @group main */
+.column {
+	width: @margin * 28;
+	float: left;
+}
+/* @end */
+
+/* @group messages */
+.error {
+	margin: @margin;
+	padding: @margin;
+}
+#content .errorlist {
+	margin: (@margin / 4) 0;
+	padding: 0;	
+}
+#content .errorlist LI {
+	list-style: none;
+	margin: @margin / 2;
+	padding: 0;
+}
+
+/* @end */
+
+/* @group forms */
+#content .pageform H1, 
+#content .pageform H2,
+#content .pageform H3,
+#content .pageform H4,
+#content .pageform H5 {
+    border: none;
+}
+.pageform {    
+    padding:  @margin * 2;
+}
+FIELDSET {
+    margin: (@margin * 2) @margin;
+    padding: @margin * 2;
+}
+LABEL {
+	display: block;
+    margin: (@margin  / 2) 0 0 0;
+}
+TEXTAREA {
+    margin: @margin 0;
+    padding: @margin;  
+    overflow: hidden;
+    vertical-align: bottom;
+}
+SELECT {
+    margin: @margin / 2;	
+}
+INPUT {
+    margin: (@margin / 2) 0;
+    padding: @margin / 2;
+    vertical-align: top;
+}
+INPUT[type="text"],
+INPUT[type="password"] {
+	width: @margin * 26;
+}
+.pageform .checkbox LABEL,
+.pageform .radio LABEL,
+.pageform .checkbox INPUT,
+.pageform .radio INPUT  {
+	display: inline-block;
+    margin: @margin / 4;
+}
+INPUT[type="submit"] {
+	display: block;
+    padding: 6px @margin;
+    margin: @margin 0;  
+}
+INPUT[type="file"] {
+	width: @margin * 20;
+	font-size: 87.4%;
+}
+/* @end */
+
+@media screen and (max-device-width: 640px) { 
+    #canvas {
+	    width: auto;
+	    margin: 8px;
+    }
+    #main {
+		position: static;
+		padding-top: 0;
+		
+	}
+    #site-tools {
+    	display: none;
+	}
+	#site-tools UL,
+	#site-tools LI,
+	#site-tools LI A {
+		float: none;
+		width: auto;
+	}
+	#header {
+		height: auto !important;
+	}
+    #content {
+	    float: none;
+        width: auto; 
+    }
+    #site-tools {
+		position: static;
+	}
+    #nav .container {
+        width: auto;
+        position: static;
+    }
+    #aside  {  
+        float: none;
+        width: auto;
+    }
+    .fullwidth {
+        width: 274px;
+    }
+    TEXTAREA {
+		width: 224px !important;
+	}	
+   .footer-columms {
+   		width: auto;	   
+	}
+	.footer-columms LI {
+   		float: none;
+   		width: auto;	
+   		padding: @margin;
+	}
+}

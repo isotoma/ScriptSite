@@ -3,7 +3,7 @@ import os
 import shutil
 from datetime import datetime
 
-import pysvn
+
 from lxml import etree 
 
 from django.core.files import File

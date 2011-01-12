@@ -3,14 +3,18 @@
 {% block content %}
 
  <form action="." method="POST"  enctype="multipart/form-data" >
+     <fieldset class="column">
  {% csrf_token %} 
  {{ form }}
  <input type='submit' name="upload" value='Upload' />
+ </fieldset>
  </form>
 
  <form action="." method="POST" />
+ <fieldset class="column">
  {% csrf_token %}
  {{ subversion_form }}
  <input type='submit' name='subversion' value='Get From Subversion' />
+ </fieldset>
  </form>
 {% endblock %}
