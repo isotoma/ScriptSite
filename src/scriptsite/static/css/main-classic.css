@@ -45,22 +45,23 @@ H1, H2, H3, H4, H5, H6 {
     color: #444;
 }
 H1 {
-	font-size:  358.05% /* 46.5px; */;
+	font-size: 161.7%; /* 21px; */
 	border-color: #666;
 }
 H2 {
-	font-size:  261.8% /* 34px; */;
-	font-weight: bold;
-	border-color: #797979;
+	font-size: 130.9%; /* 17px; */
+	margin-top: 24px;
+	padding-bottom: 8px;
+	border-bottom: #ccc solid 2px;
 }
 H3 {
-	border-bottom: #888 solid 3px;
+	border-bottom: #ccc solid 2px;
 	font-weight: bold;
-	font-size: 211.75% /* 27.5px; */
+	font-size: 161.7% /* 21px; */
 }
 H4 {
 	border-bottom: #999 solid 3px;
-	font-size: 161.7% /* 21px; */
+
 }
 H5 {
 	border-bottom: #aaa solid 2px;
@@ -106,8 +107,11 @@ CODE {
 	list-style-type: decimal;
 }
 #content UL LI {
-	margin-left: 24px;
-	list-style-type: disc;	
+	margin-left: 16px;
+	list-style-type: square;
+}
+#content UL.scriptlist LI {
+	border-top: 1px solid #ddd;
 }
 /* @group tables */
 .data {
@@ -120,9 +124,22 @@ CODE {
     font-weight: bold;
     border-bottom: 1px solid #ccc;
 }
-.data TR:nth-child(even) {
-    background-color: #eee;
+.data TD {
+	border-bottom: 1px solid #ccc;
+	vertical-align: top;
 }
+.data TR:nth-child(even) {
+    background-color: #f3f3f3;
+}
+/*
+.data TR.approval {
+    background-color: #e9e9e9;	
+}
+.data TR.approval TD,
+.data TR.approval TH {
+	border: none;
+}
+*/
 /* @end */
 /* @end */
 /* @group aside  */
@@ -223,6 +240,9 @@ CODE {
 #content UL.errorlist {
 	font-size: 84.7%;
 }
+#content UL.errorlist LI {
+	background: #ffebda;	
+}
 
 /* @end */
 
@@ -245,6 +265,10 @@ CODE {
 #main-promo P {
     font-size: 1em;
 }
+#content UL.scriptlist LI A {
+	display: block;
+	padding: 4px 8px;
+}
 /* @end */
 /* @group forms */
 FIELDSET {
@@ -255,7 +279,8 @@ FIELDSET {
     background: #f6f6f6;
 }
 INPUT[type="text"]:focus,
-INPUT[type="password"]:focus {
+INPUT[type="password"]:focus,
+TEXTAREA:focus {
 	/*
 	background: #ebf4be;
 	*/

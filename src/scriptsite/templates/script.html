@@ -1,36 +1,65 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<h1>Script Details</h1>
+<table class="data fullwidth">
+    <tr>
+        <th>File name:</th>
+        <td>{{ script.script_file }}</td>
+    </tr>
+    <tr>
+        <th>Date:</th>
+        <td>{{ script.date_uploaded }}</td>
+    </tr>
+    <tr>
+        <th>Uploaded by:</th>
+        <td>{{ script.upload_user }}</td>
+    </tr>
+    <tr>
+        <th>
+            Test number:
+        </th>
+        <td>
+            {{ num_tests }}
+        </td>
+    </tr>
+    <tr class="approval">
+        <th>Approved:</th>
+        <td>{{script.approved}}</td>
+    </tr>
+    <tr class="approval">
+        <th>Approving User:</th>
+        <td> {{script.approved_user }}</td>
+    </tr>
+</table>
 
-{{ script.script_file }} <br />
-{{ script.date_uploaded }} <br />
-{{ script.upload_user }} <br/>
-{{ num_tests }}<br />
-
-<div>Approved: {{script.approved}}</div>
-<div>Approving User: {{script.approved_user }}</div>
-
-
-<div>
-<form action="." method="POST">
+        <form action="." method="POST">
     {% csrf_token %} 
     {% if script.approved %}
+
+    <fieldset>
     <input type="submit" value="Create Test Run" name="create" />
+    </fieldset>
+
+    
     {% endif %}
-</form>
+      </form>  
 
 {% if can_approve %}
 {% if not script.approved %}
 <form action="." method="POST">
+    <fieldset>
+        <h2>Approve Script</h2>
     {% csrf_token %}
     
     {{ approval_form }}
+    <br>
     <input type="submit" value="Approve Test Run" name="approve" />
-
+    </fieldset>
 </form>
 
 {% endif %}
 {% endif %}
-</div>
+
 
 {% endblock %}

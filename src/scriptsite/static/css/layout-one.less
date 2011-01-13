@@ -14,14 +14,14 @@ Isotoma Template Layout One stylesheet: Screen
 /* @group layout */
 #canvas {
 	margin: (@margin * 4);
-	min-width: @margin * 59;
+	min-width: @margin * 72;
 }
 #main {
 	position: relative;
     min-height: @margin * 40;
 }
 #content {
-    padding: @margin;
+    padding: @margin * 2;
 }
 #aside  {  
 	float: left;
@@ -38,10 +38,20 @@ Isotoma Template Layout One stylesheet: Screen
 /* @group tables */
 
 TABLE {
-	margin: (@margin * 2) @margin;
     border-collapse: collapse;
 }
+TABLE TD,
+TABLE TH {
+	padding: (@margin / 2) @margin;
+}
+TABLE.data {
+	margin-bottom: @margin * 2;
+}
+TABLE.data TH {
+	width: @margin * 13;
+}
 .fullwidth {
+	width: 100%;
 }
 
 /* @end */
@@ -149,7 +159,11 @@ TABLE {
 /* @group main */
 .column {
 	width: @margin * 28;
+	margin-right: @margin * 2;
 	float: left;
+}
+FORM:last-of-type .column {
+	margin-right: 0;
 }
 /* @end */
 
@@ -182,7 +196,7 @@ TABLE {
     padding:  @margin * 2;
 }
 FIELDSET {
-    margin: (@margin * 2) @margin;
+    margin: (@margin * 2) 0;
     padding: @margin * 2;
 }
 LABEL {
@@ -215,9 +229,9 @@ INPUT[type="password"] {
     margin: @margin / 4;
 }
 INPUT[type="submit"] {
-	display: block;
+	display: inline-block;
     padding: 6px @margin;
-    margin: @margin 0;  
+    margin: @margin @margin @margin 0;  
 }
 INPUT[type="file"] {
 	width: @margin * 20;
@@ -261,9 +275,6 @@ INPUT[type="file"] {
     #aside  {  
         float: none;
         width: auto;
-    }
-    .fullwidth {
-        width: 274px;
     }
     TEXTAREA {
 		width: 224px !important;

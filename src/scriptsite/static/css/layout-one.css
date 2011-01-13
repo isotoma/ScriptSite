@@ -9,14 +9,14 @@ Isotoma Template Layout One stylesheet: Screen
 /* @group layout */
 #canvas {
   margin: 32px;
-  min-width: 472px;
+  min-width: 576px;
 }
 #main {
   position: relative;
   min-height: 320px;
 }
 #content {
-  padding: 8px;
+  padding: 16px;
 }
 #aside {
   float: left;
@@ -31,8 +31,19 @@ Isotoma Template Layout One stylesheet: Screen
 /* @end */
 /* @group tables */
 TABLE {
-  margin: 16px 8px;
   border-collapse: collapse;
+}
+TABLE TD, TABLE TH {
+  padding: 4px 8px;
+}
+TABLE.data {
+  margin-bottom: 16px;
+}
+TABLE.data TH {
+  width: 104px;
+}
+.fullwidth {
+  width: 100%;
 }
 /* @end */
 /* @group aside  */
@@ -135,7 +146,11 @@ TABLE {
 /* @group main */
 .column {
   width: 224px;
+  margin-right: 16px;
   float: left;
+}
+FORM:last-of-type .column {
+  margin-right: 0;
 }
 /* @end */
 /* @group messages */
@@ -165,7 +180,7 @@ TABLE {
   padding: 16px;
 }
 FIELDSET {
-  margin: 16px 8px;
+  margin: 16px 0;
   padding: 16px;
 }
 LABEL {
@@ -197,9 +212,9 @@ INPUT[type="text"], INPUT[type="password"] {
   margin: 2px;
 }
 INPUT[type="submit"] {
-  display: block;
+  display: inline-block;
   padding: 6px 8px;
-  margin: 8px 0;
+  margin: 8px 8px 8px 0;
 }
 INPUT[type="file"] {
   width: 160px;
@@ -239,9 +254,6 @@ INPUT[type="file"] {
   #aside {
     float: none;
     width: auto;
-  }
-  .fullwidth {
-    width: 274px;
   }
   TEXTAREA {
     width: 224px !important;

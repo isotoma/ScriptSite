@@ -2,14 +2,31 @@
 
 {% block content %}
 
-<h3>Run Statistics</h3>
-<p>Created: {{ run.date_started }}</p>
-<p>Flavour: {{ flavour }} </p>
-<p>Passed: {{ passed }}</p>
-<p>Failed: {{ failed }}</p>
-<p>Incomplete: {{ incomplete }}</p>
+<h1>Run Statistics</h1>
+<table class="data fullwidth">
+    <tr>
+        <th>Created: </th>
+        <td>{{ run.date_started }}</td>
+    </tr>
+    <tr>
+        <th>Flavour: </th>
+        <td>{{ flavour }} </td>
+    </tr>
+    <tr>
+        <th>Passed:</th>
+        <td>{{ passed }}</td>
+    </tr>
+    <tr>
+        <th>Failed:</th>
+        <td> {{ failed }}</td>
+    </tr>
+    <tr>
+        <th>Incomplete:</th>
+        <td> {{ incomplete }}</td>
+    </tr>
+</table>
 
-<h3>Groups to test</h3>
+<h2>Groups to test</h2>
 <ul>
 {% for group in groups %}
  <li>{{ group.name }}</li>
