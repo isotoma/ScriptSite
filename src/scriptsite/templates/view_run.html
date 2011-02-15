@@ -16,10 +16,8 @@
             {% if view %}
             <th>Automated Test ID</th>
             {% endif %}
-            {% if not view %}
             <th>Actual Result</th>
             <th>Pass / Fail</th>
-            {% endif %}
             
         </thead>
     {% for test in  group.singletest_set.all %}
@@ -31,8 +29,14 @@
             {% if view %}
             <td>{{ test.automated_test_id }}</td>
             {% endif %}
-            {% if not view %}
-            <td><input name="{{test.id}}-actual_result" type="text" value="{{ test.actual_result }}"/></td>
+            {% if view %}
+            <td><input name="{{test.id}}-actual_result" type="text" value="{{ test.actual_result }}" readonly="readonly"/></td>
+            <td>
+              <label><input type="radio" name="{{test.id}}-passfail" value="pass" disabled="disabled" {% if test.get_status_as_string == 'True' %}checked{% endif %}/> Pass</label> 
+                <label><input type="radio" name="{{test.id}}-passfail" value="fail" disabled="disabled" {% if test.get_status_as_string == 'False' %}checked{% endif %}/> Fail</label>
+            </td>
+            {% else %}
+            <td><input name="{{test.id}}-actual_result" type="text" value="{{ test.actual_result }}" /></td>
             <td>
               <label><input type="radio" name="{{test.id}}-passfail" value="pass" {% if test.get_status_as_string == 'True' %}checked{% endif %}/> Pass</label> 
                 <label><input type="radio" name="{{test.id}}-passfail" value="fail" {% if test.get_status_as_string == 'False' %}checked{% endif %}/> Fail</label>
