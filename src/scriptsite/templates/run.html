@@ -28,6 +28,16 @@
         <th>Incomplete:</th>
         <td> {{ run.get_incomplete }}</td>
     </tr>
+    <tr>
+        <th>Editting Users:</th>
+        <td>{% for user in run.edit_users.all %}
+            {% if forloop.last %}
+                {{ user.username }}
+            {% else %}
+                {{ user.username }}, 
+            {% endif %}
+            {% endfor %}</td>
+    </tr>
 </table>
 
 <h2>Groups to test</h2>

@@ -26,6 +26,7 @@ class TestRun(models.Model):
     """ A particular test run, of a given script """
     date_started = models.DateTimeField()
     test_script = models.ForeignKey(TestScript)
+    edit_users = models.ManyToManyField(User)
     
     def get_passed(self):
         passed = 0

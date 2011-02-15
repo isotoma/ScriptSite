@@ -143,7 +143,7 @@ def view_run(request, run_id, view):
     
     if request.method == 'POST':
         if request.user.has_perm('main.change_testrun'):
-            update_data(request.POST, test_run)
+            update_data(request.POST, test_run, request.user)
             return HttpResponseRedirect(reverse('test_run', kwargs={'run_id': run_id}));
     
     data['run'] = test_run
@@ -152,7 +152,7 @@ def view_run(request, run_id, view):
     
     return render_to_response('view_run.html', data, context_instance = RequestContext(request))
 
-def update_data(data, test_run):
+def update_data(data, test_run, user):
     for d in data.iteritems():
         
         if d[0] == 'csrfmiddlewaretoken':
@@ -175,8 +175,16 @@ def update_data(data, test_run):
                 test.passed = False
             else:
                 test.passed = None
-        
+                
+                
         test.save()
+        
+        # add the editing user to the list
+        users = test.test_group.test_run.edit_users
+        
+        if not users.filter(id = user.id):
+            users.add(user)
+        
         
 @login_required
 def download_run(request, run_id):
