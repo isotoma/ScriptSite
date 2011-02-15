@@ -2,10 +2,40 @@
 
 {% block content %}
 <h1>Scripts</h1>
-    <ul class="scriptlist">
-    {% for script in scripts %}
-        <li><a href="{{ script.id }}/">{{ script.script_file.name }}</a></li>
-    {% endfor %}
-    </ul>
+    <table>
+        <thead>
+            <th>Script ID</th>
+            <th>Script Flavour</th>
+            <th>Script Creator</th>
+            <th>Script Uploading Time</th>
+            <th>Approved</th>
+            <th>Script Runs</th>
+        </thead>
+        <tbody>
+            {% for script in scripts %}
+                <tr>
+                    <td><a href="{{ script.id }}/">{{ script.id }}</a></td>
+                    <td>{{ script.flavour }}</td>
+                    <td>{{ script.upload_user }}</td>
+                    <td>{{ script.date_uploaded }}</td>
+                    <td>{% if script.approved %}<img src="/static/images/tick-green32px.png" />
+                        {% else %}
+                        <img src="/static/images/cross-red32px.png" />
+                        {% endif %}
+                        </td>
+                    <td>{% for tr in script.testrun_set.all %}
+                            
+                            {% if forloop.last %}
+                                <a href="/testrun/{{ tr.id }}/">{{ tr.id }}</a>
+                            {% else %} 
+                                <a href="/testrun/{{ tr.id }}/">{{ tr.id }}, </a>
+                            {% endif %}
+                            {% endfor %}
+                        
+                        </td>
+                </tr>
+            {% endfor %}
+        <tbody>    
+    </table>
 
 {% endblock %}
