@@ -164,22 +164,20 @@ def view_run(request, run_id, view):
 def update_data(data, test_run):
     for d in data.iteritems():
         
-        split = d[0].split('/')
-        if len(split) < 3: 
-            continue 
-
-        group = test_run.testgroup_set.get(name = split[0])
-        test = group.singletest_set.get(name = split[1])
+        if d[0] == 'csrfmiddlewaretoken':
+            continue
         
+        split = d[0].split('-')
         
+        test = SingleTest.objects.get(id = split[0])
         
-        if split[2] == 'actual':
+        if split[1] == 'actual_result':
             if d[1] and d[1] != 'None':
                 test.actual_result = d[1]
             else:
                 test.actual_result = ""
             
-        if split[2] == 'passfail':
+        if split[1] == 'passfail':
             if d[1] == 'pass':
                 test.passed = True
             elif d[1] == 'fail':

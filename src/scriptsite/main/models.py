@@ -61,6 +61,6 @@ class SingleTest(models.Model):
         elif self.passed == False:
             return "Fail"
         else:
-            return None
+            return ''
 
     

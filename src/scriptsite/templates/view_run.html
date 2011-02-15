@@ -32,10 +32,10 @@
             <td>{{ test.automated_test_id }}</td>
             {% endif %}
             {% if not view %}
-            <td><input name="{{group.name}}/{{test.name}}/actual" type="text" value="{{ test.actual_result }}"/></td>
+            <td><input name="{{test.id}}-actual_result" type="text" value="{{ test.actual_result }}"/></td>
             <td>
-              <label><input type="radio" name="{{group.name}}/{{test.name}}/passfail" value="pass" {% if test.get_status_as_string == 'True' %}checked{% endif %}/> Pass</label> 
-                <label><input type="radio" name="{{group.name}}/{{test.name}}/passfail" value="fail" {% if test.get_status_as_string == 'False' %}checked{% endif %}/> Fail</label>
+              <label><input type="radio" name="{{test.id}}-passfail" value="pass" {% if test.get_status_as_string == 'True' %}checked{% endif %}/> Pass</label> 
+                <label><input type="radio" name="{{test.id}}-passfail" value="fail" {% if test.get_status_as_string == 'False' %}checked{% endif %}/> Fail</label>
             </td>
             {% endif %}
         </tr>
