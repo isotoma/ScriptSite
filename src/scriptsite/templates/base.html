@@ -24,7 +24,7 @@
             <div id="header" class="clearfix">
                 <img src="/static/images/iso-logo-35.png" width="35" height="47" alt="Iso Logo 35" id="logo">
                 <h1>ScriptSite</h1>
-                <div id="logout"><a href="{% url logout %}">Logout</a></div>
+                <div id="logout">Logged in as: {{ user.username }}<a href="{% url logout %}">Logout</a></div>
             </div>
             <div id="nav" class="clearfix">
                 <ul>
