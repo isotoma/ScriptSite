@@ -5,7 +5,7 @@ from datetime import datetime
 
 
 from lxml import etree 
-
+import pysvn
 from django.core.files import File
 
 from scriptsite import settings
