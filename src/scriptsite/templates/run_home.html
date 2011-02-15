@@ -2,10 +2,25 @@
 
 {% block content %}
 <h1>Test Runs</h1>
-<ul class="scriptlist">
-{% for run in runs %}
- <li><a href="{{ run.id }}/">{{ run.id }}</a></li>
-{% endfor %}
-</ul>
+<table>
+ <thead>
+  <th>Run ID</th>
+  <th>Run Flavour</th>
+  <th>Passed</th>
+  <th>Failed</th>
+  <th>Complete</th>
+ </thead>
+ <tbody>
+  {% for run in runs %}
+   <tr>
+    <td><a href="{{ run.id }}/">{{ run.id }}</a></td>
+    <td>{{ run.test_script.flavour }}</td>
+    <td>{{ run.get_passed }}</td>
+    <td>{{ run.get_failed }}</td>
+    <td>{% if run.get_incomplete %}NO{% else %}YES{% endif %}</td>
+   </tr>
+  {% endfor %}
+ </tbody>
+</table>
 
 {% endblock %}

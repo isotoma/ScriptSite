@@ -26,6 +26,24 @@ class TestRun(models.Model):
     """ A particular test run, of a given script """
     date_started = models.DateTimeField()
     test_script = models.ForeignKey(TestScript)
+    
+    def get_passed(self):
+        passed = 0
+        for group in self.testgroup_set.all():
+            passed += len(group.singletest_set.filter(passed = True))
+        return passed
+    
+    def get_failed(self):
+        failed = 0
+        for group in self.testgroup_set.all():
+            failed += len(group.singletest_set.filter(passed = False))
+        return failed
+            
+    def get_incomplete(self):
+        incomplete = 0
+        for group in self.testgroup_set.all():
+            incomplete += len(group.singletest_set.filter(passed = None))
+        return incomplete
         
 class TestGroup(models.Model):
     """ A group of tests, for a particular category of test """

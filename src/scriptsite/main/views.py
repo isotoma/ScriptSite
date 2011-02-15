@@ -127,15 +127,6 @@ def test_run(request, run_id):
     
     data['run'] = test_run
     data['groups'] = test_run.testgroup_set.all()
-    passed = failed = incomplete = 0
-    for group in test_run.testgroup_set.all():
-        passed += len(group.singletest_set.filter(passed = True))
-        failed += len(group.singletest_set.filter(passed = False))
-        incomplete += len(group.singletest_set.filter(passed = None))
-    data['passed'] = passed
-    data['failed'] = failed
-    data['incomplete'] = incomplete
-    
     data['flavour'] = test_run.test_script.flavour
     
     return render_to_response('run.html', data, context_instance = RequestContext(request))

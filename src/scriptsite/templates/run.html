@@ -9,20 +9,24 @@
         <td>{{ run.date_started }}</td>
     </tr>
     <tr>
+        <th>Original Script</th>
+        <td><a href="/script/{{ run.test_script.id }}/">{{ run.test_script.id }}</a></td>
+    </tr>
+    <tr>
         <th>Flavour: </th>
         <td>{{ flavour }} </td>
     </tr>
     <tr>
         <th>Passed:</th>
-        <td>{{ passed }}</td>
+        <td>{{ run.get_passed }}</td>
     </tr>
     <tr>
         <th>Failed:</th>
-        <td> {{ failed }}</td>
+        <td> {{ run.get_failed }}</td>
     </tr>
     <tr>
         <th>Incomplete:</th>
-        <td> {{ incomplete }}</td>
+        <td> {{ run.get_incomplete }}</td>
     </tr>
 </table>
 
