@@ -1,11 +1,18 @@
 from django import forms
 
 from scriptsite.main.models import TestScript
+from xml_analysis import extract_flavour
 
 class ScriptForm(forms.ModelForm):
     class Meta:
         model = TestScript
         exclude = ('approved', 'upload_user', 'approved_user', 'version_of_software', 'software_environment')
+        
+    def save(self, force_insert=False, force_update=False, commit=True):
+        instance = super(forms.ModelForm, self).save(commit=False)
+        instance.save(force_insert = force_insert, force_update = force_update)
+        instance.flavour = extract_flavour(instance.script_file.path)
+        instance.save(force_insert = force_insert, force_update = force_update)
         
 class SubversionForm(forms.Form):
     """ Subversion connection / retrieval details """

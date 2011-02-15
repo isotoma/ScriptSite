@@ -60,6 +60,14 @@ def convert_script_to_models(script):
             test_model.save()
             
     return test_run
+
+def extract_flavour(input_file):
+    """ Extract the flavour from an already created file """
+    # get the xml doc from the script
+    xml_doc = get_xml_doc(input_file)
+    
+    # aaaand we're done
+    return xml_doc.attrib['flavour']
             
 
     
