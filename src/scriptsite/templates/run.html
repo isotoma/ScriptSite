@@ -50,8 +50,13 @@
 <form action="." method="POST">
 {% csrf_token %}
 <input type="submit" value="View Run" name="view" />
+{% if not run.closed and perms.main.change_testrun %}
 <input type="submit" value="Edit Run" name="edit" />
+{% endif %}
 <input type="submit" value="Download Run" name="download" />
+{% if can_close %}
+<input type="submit" value="Close Run" name="close" />
+{% endif %}
 </form>
 
 {% endblock %} 

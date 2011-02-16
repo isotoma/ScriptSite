@@ -92,13 +92,15 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.admin',
     'scriptsite.main',
-    'south'
+    'south',
+    'devserver',
 )
 
 DEVSERVER_MODULES = (
     'devserver.modules.sql.SQLRealTimeModule',
     'devserver.modules.sql.SQLSummaryModule',
     'devserver.modules.profile.ProfileSummaryModule',
+    'devserver.modules.request.SessionInfoModule',
 
     # Modules not enabled by default
     #'devserver.modules.ajax.AjaxDumpModule',

@@ -39,8 +39,7 @@
 
         <form action="." method="POST">
     {% csrf_token %} 
-    {% if script.approved %}
-
+    {% if script.approved and perms.main.add_testrun %}
     <fieldset>
     <input type="submit" value="Create Test Run" name="create" />
     </fieldset>
@@ -51,6 +50,7 @@
 
 {% if can_approve %}
 {% if not script.approved %}
+
 <form action="." method="POST">
     <fieldset>
         <h2>Approve Script</h2>

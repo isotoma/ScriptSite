@@ -75,7 +75,7 @@ def script(request, script_id):
         data['script'] = script
         data['num_tests'] = get_number_of_tests(script)
         data['can_approve'] = request.user.has_perm('main.testscript.can_approve')
-        
+
         data['approval_form'] = ScriptReviewForm()
     except:
         return HttpResponseRedirect(reverse('script_home'))
@@ -124,10 +124,14 @@ def test_run(request, run_id):
                 return HttpResponseRedirect(reverse('edit_run', kwargs = {'run_id': test_run.id}))
         if request.POST.get('download', None):
             return HttpResponseRedirect(reverse('download_run', kwargs = {'run_id': test_run.id}))
+        if request.POST.get('close', None):
+            test_run.closed = True
+            test_run.save()
     
     data['run'] = test_run
     data['groups'] = test_run.testgroup_set.all()
     data['flavour'] = test_run.test_script.flavour
+    data['can_close'] = request.user.has_perm('main.testscript.can_close')
     
     return render_to_response('run.html', data, context_instance = RequestContext(request))
 
@@ -140,6 +144,10 @@ def view_run(request, run_id, view):
         test_run = TestRun.objects.get(id = run_id)
     except:
         return HttpResponseRedirect(reverse('test_run_home'))
+    
+    # double check that we're not sneakily trying to edit a closed run
+    if test_run.closed:
+        view = True
     
     if request.method == 'POST':
         if request.user.has_perm('main.change_testrun'):

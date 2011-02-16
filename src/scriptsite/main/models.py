@@ -17,9 +17,11 @@ class TestScript(models.Model):
     version_of_software = models.TextField(blank = True, null = True)
     software_environment = models.TextField(blank = True, null = True)
     
+    
     class Meta:
         permissions = (
-            ('can_approve', 'Can approve a test script'),
+            ('testscript.can_approve', 'Can approve a test script'),
+            ('testscript.can_close', 'Can close a test script'),
         )
     
 class TestRun(models.Model):
@@ -27,6 +29,7 @@ class TestRun(models.Model):
     date_started = models.DateTimeField()
     test_script = models.ForeignKey(TestScript)
     edit_users = models.ManyToManyField(User)
+    closed = models.BooleanField(default = False)
     
     def get_passed(self):
         passed = 0
