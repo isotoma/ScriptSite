@@ -1,0 +1,2 @@
+recursive-include scriptsite *.html
+recursive-include scriptsite/static *
