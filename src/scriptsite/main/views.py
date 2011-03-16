@@ -12,7 +12,7 @@ import ho.pisa as pisa
 
 from scriptsite.main.forms import ScriptForm, SubversionForm, ScriptReviewForm
 from scriptsite.main.models import TestScript, TestRun, SingleTest
-from scriptsite.main.xml_analysis import get_number_of_tests, convert_script_to_models
+from scriptsite.main.xml_analysis import get_number_of_tests, convert_script_to_models, get_xml_doc, convert_script_to_dicts
 from scriptsite.main.subversion import get_from_subversion
 
 def home(request):
@@ -82,9 +82,17 @@ def script(request, script_id):
     
     if request.method == 'POST':
         # check if the user can do this
+        
+        # Preview the test script
+        if request.POST.get('preview', None):
+            return HttpResponseRedirect(reverse('script_view', kwargs = {'script_id': script.id }))
+        
+        # Create a test run from the test script
         if request.user.has_perm('main.add_testrun') and request.POST.get('create', None):
             test_run = convert_script_to_models(script)
             return HttpResponseRedirect(reverse('test_run', kwargs = {'run_id': test_run.id}))
+        
+        # Approve the test script
         if request.user.has_perm('main.testscript.can_approve') and request.POST.get('approve', None):
             approval_form = ScriptReviewForm(request.POST)
             if approval_form.is_valid():
@@ -97,6 +105,19 @@ def script(request, script_id):
 
       
     return render_to_response('script.html', data, context_instance = RequestContext(request))
+
+@login_required
+def script_view(request, script_id):
+    
+    script = TestScript.objects.get(id = script_id)
+    
+    data = {'script': script}
+    data['doc'] = convert_script_to_dicts(script)
+    
+    if request.method == 'POST':
+        return HttpResponseRedirect(reverse('script', kwargs = {'script_id': script.id}))
+    
+    return render_to_response('view_script.html', data, context_instance = RequestContext(request))
 
 @login_required
 def test_run_home(request):

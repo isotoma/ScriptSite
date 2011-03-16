@@ -37,6 +37,11 @@
     </tr>
 </table>
 
+    <form action="." id="preview_form" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Preview Test Script" name="preview" />
+    </form>
+
         <form action="." method="POST">
     {% csrf_token %} 
     {% if script.approved and perms.main.add_testrun %}

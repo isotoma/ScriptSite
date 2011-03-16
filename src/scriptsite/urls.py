@@ -18,7 +18,7 @@ from django.contrib.auth.views import login, logout
 from django.contrib import admin
 admin.autodiscover()
 
-from scriptsite.main.views import script, script_home, upload, test_run, test_run_home, view_run, download_run, home
+from scriptsite.main.views import script, script_view, script_home, upload, test_run, test_run_home, view_run, download_run, home
 
 urlpatterns = patterns('',
 
@@ -41,8 +41,9 @@ urlpatterns = patterns('',
     (r'^favicon\.ico$', lambda r: HttpResponseRedirect('/static/images/favicon.ico')),
     
     url(r'^$', home, name = 'home'),
-    url(r'^script/(?P<script_id>\d+)/$', script, name = 'script'),
-    url(r'^script/', script_home, name = 'script_home'),
+    url(r'script/view/(?P<script_id>\d+)/$', script_view, name = 'script_view'),
+    url(r'script/(?P<script_id>\d+)/$', script, name = 'script'),
+    url(r'script/', script_home, name = 'script_home'),
     url(r'testrun/view/(?P<run_id>\d+)/$', view_run, name = 'view_run', kwargs={'view': True}),
     url(r'testrun/edit/(?P<run_id>\d+)/$', view_run, name = 'edit_run', kwargs={'view': False}),
     url(r'testrun/download/(?P<run_id>\d+)/$', download_run, name = 'download_run'),
