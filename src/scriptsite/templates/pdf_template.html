@@ -17,6 +17,11 @@
 			height: 1cm;
 		      }
 	}
+
+	@font-face {
+  		font-family: "Your typeface";
+		src: url("/usr/share/fonts/truetype/ttf-dejavu/DejaVuSansMono.ttf");
+	}
 	
 	pdftoc {
 		color: #666;
@@ -35,6 +40,8 @@
 	    
 	body {
 		color: black;	
+		font-family: "Your typeface";
+		font-size: 6pt
 	}
 	
 	td, th {
@@ -104,6 +111,7 @@
 	<pdf:nextpage />
 	
 	{% for test_group in test_run.testgroup_set.all %}
+	<h2>Tests</h2>
 	<div class="test_group">
 		<h2>{{ test_group.name }}</h2>
 		<table repeat="1" border="1">
@@ -113,9 +121,10 @@
 			{% for test in test_group.singletest_set.all %}
 			<tr>
 				<td class="name" width="80">{{ test.name }}</td>
-				<td class="story_id" width="100">{{ test.story_id }}</td>
+				<td class="story" width="80">{{ test.story_id }}</td>
+				<td class="summary" width="100">{{ test.summary }}</td>
 				<td class="steps">{{ test.steps }}</td>
-				<td class="expected_result" width="200">{{ test.expected_results }}</td>
+				<td class="expected_result" width="100">{{ test.expected_results }}</td>
 				<td>{% if test.actual_result %}{{ test.actual_result }}{% endif %}</td>
 				<td width="50">{% if test.get_status_as_string != 'None' %} {{test.get_status_as_friendly_string }} {% endif %}</td>
 			</tr>
