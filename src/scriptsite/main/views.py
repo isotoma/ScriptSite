@@ -98,6 +98,10 @@ def script(request, script_id):
             if approval_form.is_valid():
                 script.version_of_software = approval_form.cleaned_data['version_of_software']
                 script.software_environment = approval_form.cleaned_data['software_environment']
+                script.text_environment = approval_form.cleaned_data['test_environment']
+                script.browser_version = approval_form.cleaned_data['browser_version']
+                script.trac_milestone = approval_form.cleaned_data['trac_milestone']
+                script.test_ticket_number = approval_form.cleaned_data['test_ticket_number']
                 script.approved = True
                 script.approved_user = request.user
                 script.save()

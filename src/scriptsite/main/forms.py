@@ -28,3 +28,7 @@ class ScriptReviewForm(forms.Form):
     
     version_of_software = forms.CharField(max_length = 100)
     software_environment = forms.CharField(max_length = 100, widget = forms.Textarea)
+    test_environment = forms.CharField(widget = forms.Textarea)
+    browser_version = forms.CharField(widget = forms.Textarea)
+    trac_milestone = forms.CharField(max_length = 100)
+    test_ticket_number = forms.CharField(max_length = 100)
