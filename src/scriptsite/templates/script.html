@@ -37,6 +37,36 @@
     </tr>
 </table>
 
+{% if script.approved %}
+<h1>Script Meta Information</h1>
+<table class="data fullwidth">
+    <tr>
+        <th>Version of Software:</th>
+        <td>{{ script.version_of_software }}</td>
+    </tr>
+    <tr>
+        <th>Software Environment:</th>
+        <td>{{ script.software_environment }}</td>
+    </tr>
+    <tr>
+        <th>Test Environment:</th>
+        <td>{{ script.test_environment }}</td>
+    </tr>
+    <tr>
+        <th>Browser Version:</th>
+        <td>{{ script.browser_version }}</td>
+    </tr>
+    <tr>
+        <th>Trac Milestone:</th>
+        <td>{{ script.trac_milestone }}</td>
+    </tr>
+    <tr>
+        <th>Test Ticket Number:</th>
+        <td>{{ script.test_ticket_number }}</td>
+    </tr>
+</table>
+{% endif %}
+
     <form action="." id="preview_form" method="POST">
         {% csrf_token %}
         <input type="submit" value="Preview Test Script" name="preview" />
