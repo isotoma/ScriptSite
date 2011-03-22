@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for group in doc.groups %}
+    <h1>{{ group.name }}</h1>
+    <table class="data fullwidth">
+        <thead>
+            <th>Test Name</th>
+            <th>Story ID</th>
+            <th>Test Steps</th>
+            <th>Expected Result</th>
+            <th>Automated Test ID</th>
+            
+        </thead>
+    {% for test in  group.tests %}
+        <tr>
+            <td>{{ test.name }}</td>
+            <td>{{ test.story_id }}</td>
+            <td>{{ test.steps|linebreaksbr }}</td>
+            <td>{{ test.expected_results }}</td>
+            <td>{{ test.automated_test_id }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endfor %}
+
+<form action="." method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Done" />
+</form>
+{% endblock %}

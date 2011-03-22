@@ -16,6 +16,10 @@ class TestScript(models.Model):
     
     version_of_software = models.TextField(blank = True, null = True)
     software_environment = models.TextField(blank = True, null = True)
+    test_environment = models.TextField(blank = True, null = True)
+    browser_version = models.TextField(blank = True, null = True)
+    trac_milestone = models.TextField(blank = True, null = True)
+    test_ticket_number = models.TextField(blank = True, null = True)
     
     
     class Meta:

@@ -98,6 +98,10 @@ def script(request, script_id):
             if approval_form.is_valid():
                 script.version_of_software = approval_form.cleaned_data['version_of_software']
                 script.software_environment = approval_form.cleaned_data['software_environment']
+                script.text_environment = approval_form.cleaned_data['test_environment']
+                script.browser_version = approval_form.cleaned_data['browser_version']
+                script.trac_milestone = approval_form.cleaned_data['trac_milestone']
+                script.test_ticket_number = approval_form.cleaned_data['test_ticket_number']
                 script.approved = True
                 script.approved_user = request.user
                 script.save()
@@ -229,6 +233,7 @@ def download_run(request, run_id):
     template_data['generation_time'] = datetime.now()
     template_data['script_revision'] = test_run.test_script.revision
     template_data['test_run'] = test_run
+    template_data['downloading_user'] = request.user.username
     
     template = get_template('pdf_template.html')
     context = Context(template_data)
