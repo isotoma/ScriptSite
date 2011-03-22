@@ -6,7 +6,16 @@ from xml_analysis import extract_flavour
 class ScriptForm(forms.ModelForm):
     class Meta:
         model = TestScript
-        exclude = ('approved', 'upload_user', 'approved_user', 'version_of_software', 'software_environment', 'closed')
+        exclude = ('approved', 
+                   'upload_user', 
+                   'approved_user', 
+                   'version_of_software', 
+                   'software_environment', 
+                   'closed',
+                   'test_environment',
+                   'browser_version',
+                   'trac_milestone',
+                   'test_ticket_number')
         
     def save(self, force_insert=False, force_update=False, commit=True):
         instance = super(forms.ModelForm, self).save(commit=False)

@@ -79,26 +79,26 @@
 				</tr>
 				<tr>
 					<td>Version of software under test</td>
-					<td width="500" border="1">&nbsp;</td>
+					<td width="500" border="1">{{ test_run.test_script.version_of_software }}</td>
 				</tr>
 				<tr>
 					<td>Test Environment</td>
-					<td width="500">&nbsp;</td>
+					<td width="500">{{ test_run.test_script.software_environment }}</td>
 				</tr>
 				<tr>
 					<td>Browser and Version</td>
-					<td width="500">&nbsp;</td>
+					<td width="500">{{ test_run.test.test_script.browser_version }}</td>
 				</tr>
 				<tr>
 					<td>Trac Milestone</td>
-					<td width="500">&nbsp;</td>
+					<td width="500">{{ test_run.test_script.trac_milestone }}</td>
 				</tr>
 			</table>
 			<H2 class="signature">Lead Developer Pre Approval</H2>
 			<table border="1">
 				<tr>
-					<td>Lead Developer Signature</td>
-					<td width="500">&nbsp;</td>
+					<td>Lead Developer</td>
+					<td width="500">{{ test_run.test_script.approved_user }}</td>
 				</tr>
 			</table>
 		</div>
@@ -139,12 +139,20 @@
 		<table>
 			<table border="1">
 				<tr>
+				{% if test_run.edit_users.all|length == 1 %}
 					<td>Test Executer</td>
-					<td width="500">&nbsp;</td>
+				{% else %}
+					<td>Test Executers</td>
+				{% endif %}
+					<td width="500">
+					{% for user in test_run.edit_users.all %}
+					{{ user.username }}
+					{% endfor %}
+					</td>
 				</tr>
 				<tr>
-					<td>Test Reviewer</td>
-					<td width="500">&nbsp;</td>
+					<td>Test Downloader</td>
+					<td width="500">{{ downloading_user }}</td>
 				</tr>
 			</table>
 		</table>

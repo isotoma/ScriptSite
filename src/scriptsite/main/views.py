@@ -233,6 +233,7 @@ def download_run(request, run_id):
     template_data['generation_time'] = datetime.now()
     template_data['script_revision'] = test_run.test_script.revision
     template_data['test_run'] = test_run
+    template_data['downloading_user'] = request.user.username
     
     template = get_template('pdf_template.html')
     context = Context(template_data)
