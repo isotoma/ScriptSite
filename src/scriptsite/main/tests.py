@@ -1,23 +1,30 @@
-"""
-This file demonstrates two different styles of tests (one doctest and one
-unittest). These will both pass when you run "manage.py test".
+import os
 
-Replace these with more appropriate tests for your application.
-"""
-
+from mock import Mock
+from lxml.etree import _Element
 from django.test import TestCase
 
-class SimpleTest(TestCase):
-    def test_basic_addition(self):
+import xml_analysis
+from models import TestScript
+
+class XmlAnalysisTest(TestCase):
+    
+    def setUp(self):
+        self.test_file_path = os.path.join(os.path.dirname(__file__), '..', 'test_files', 'sample.xml')
+
+    def test_get_xml_doc(self):
         """
-        Tests that 1 + 1 always equals 2.
+        Test that we can retrieve an xml document from disk
         """
-        self.failUnlessEqual(1 + 1, 2)
+        xml_doc = xml_analysis.get_xml_doc(self.test_file_path)
 
-__test__ = {"doctest": """
-Another way to test that 1 + 1 is equal to 2.
-
->>> 1 + 1 == 2
-True
-"""}
-
+    def test_get_number_of_tests(self):
+        """
+        Check that we are loading the right number of tests from our sample test document
+        """
+        
+        script = Mock(spec = TestScript)
+        script.script_file.path = self.test_file_path
+        
+        number = xml_analysis.get_number_of_tests(script)
+        self.assertTrue(number == 4)

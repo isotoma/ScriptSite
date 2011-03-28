@@ -9,7 +9,7 @@ __version__ = '$Revision$'[11:-2]
 import os
 
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+TEMPLATE_DEBUG = True
 SERVE_STATIC = True
 
 ADMINS = (
@@ -117,7 +117,6 @@ try:
     from local_settings import *
 except ImportError:
     pass
-
 
 
 

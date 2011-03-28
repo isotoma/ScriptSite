@@ -1,0 +1,44 @@
+<test_doc flavour="sample" generated="2011-02-22 09:23"><test_group name="sample"><test>
+	<name>sample-1-test-2</name>
+	<summary>This is the second of the sample tests</summary>
+	<requirement>A Requirement</requirement>
+	<steps>
+	1. Log in
+	2. Click some stuff
+	3. Log out again
+	</steps>
+	<expected_result>Some stuff will happen, and then some more stuff</expected_result>
+</test><test>
+	<name>sample-1-test-1</name>
+	<summary>This is a the first of the sample tests</summary>
+	<requirement>A Requirement</requirement>
+	<steps>
+	1. Log in
+	2. Click some stuff
+	3. Log out again
+	</steps>
+	<expected_result>Some stuff will happen, and then some more stuff</expected_result>
+</test><friendly_name>SAMPLE ONE</friendly_name>
+</test_group><test_group name="sample_two"><test>
+	<name>sample-2-test-2</name>
+	<summary>This is the second of the sample tests</summary>
+	<requirement>A Requirement</requirement>
+	<steps>
+	1. Log in
+	2. Click some stuff
+	3. Log out again
+	</steps>
+	<expected_result>Some stuff will happen, and then some more stuff</expected_result>
+</test><test>
+	<name>sample-2-test-1</name>
+	<summary>This is a the first of the sample tests</summary>
+	<requirement>A Requirement</requirement>
+	<steps>
+	1. Log in
+	2. Click some stuff
+	3. Log out again
+	</steps>
+	<expected_result>Some stuff will happen, and then some more stuff</expected_result>
+</test><friendly_name>SAMPLE TWO</friendly_name>
+</test_group><script_version>1</script_version>
+</test_doc>
