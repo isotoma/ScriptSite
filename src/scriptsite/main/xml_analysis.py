@@ -23,6 +23,14 @@ def get_number_of_tests(script):
 
     return len(tests)
 
+def extract_flavour(script):
+    """ Extract the flavour from an already created file """
+    # get the xml doc from the script
+    xml_doc = get_xml_doc(script.script_file.path)
+
+    # aaaand we're done
+    return xml_doc.attrib['flavour']
+
 def convert_script_to_models(script):
     """ Explode the incoming xml file into database models and save them """
 
@@ -61,13 +69,6 @@ def convert_script_to_models(script):
 
     return test_run
 
-def extract_flavour(input_file):
-    """ Extract the flavour from an already created file """
-    # get the xml doc from the script
-    xml_doc = get_xml_doc(input_file)
-
-    # aaaand we're done
-    return xml_doc.attrib['flavour']
 
 def convert_script_to_dicts(script):
 

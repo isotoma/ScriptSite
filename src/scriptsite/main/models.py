@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+from django.core.files import File as DjangoFile
 
 from django.contrib.auth.models import User
 
@@ -21,6 +22,10 @@ class TestScript(models.Model):
     trac_milestone = models.TextField(blank = True, null = True)
     test_ticket_number = models.TextField(blank = True, null = True)
     
+    def set_from_file(self, file_path, file_name, revision = 0):
+        """ Set all the parameters from an existing file """
+        self.revision = revision
+        self.script_file = DjangoFile(open(file_path), file_path)
     
     class Meta:
         permissions = (

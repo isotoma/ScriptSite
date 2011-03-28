@@ -28,3 +28,65 @@ class XmlAnalysisTest(TestCase):
         
         number = xml_analysis.get_number_of_tests(script)
         self.assertTrue(number == 4)
+        
+    def test_extract_flavour(self):
+        """ Check that we are extracting the right flavour from our test file """
+        
+        script = Mock(spec = TestScript)
+        script.script_file.path = self.test_file_path
+        
+        flavour = xml_analysis.extract_flavour(script)
+        self.assertTrue(flavour, 'sample')
+        
+    def test_convert_script_to_dicts(self):
+        """ Given the sample xml file, can we convert it to the right dict structure """
+        
+        script = Mock(spec = TestScript)
+        script.script_file.path = self.test_file_path
+        
+        dicts = xml_analysis.convert_script_to_dicts(script)
+        self.assertTrue(dicts.keys() == ['flavour', 'groups'])
+        
+        self.assertTrue(len(dicts['groups']) == 2)
+        
+        for group in dicts['groups']:
+            for test in group['tests']:
+                self.assertTrue(len(test.keys()) == 5)
+                for key, value in test.iteritems():
+                    self.assertTrue(value != None)
+                    
+    def test_convert_script_to_models(self):
+        """ Give the sample xml file, can we convert it and pop it in the database correctly """
+        
+        script = TestScript()
+        script.set_from_file(self.test_file_path, 'sample.xml')
+        script.save()
+        
+        model = xml_analysis.convert_script_to_models(script)
+        
+        self.assertTrue(model.get_incomplete() == 4)
+        
+        self.assertTrue(model.testgroup_set.count() == 2)
+        
+        for group in model.testgroup_set.all():
+            for test in group.singletest_set.all():
+                self.assertTrue(test.name != None)
+                self.assertTrue(test.story_id != None)
+                self.assertTrue(test.steps != None)
+                self.assertTrue(test.expected_results != None)
+                self.assertTrue(test.automated_test_id != None)
+        
+        
+        
+class ModelsTest(TestCase):
+    
+    def setUp(self):
+        self.test_file_path = os.path.join(os.path.dirname(__file__), '..', 'test_files', 'sample.xml')
+        
+    
+    def test_create_script_from_file(self):
+        """ Check we can create a script from an already existing file """
+        
+        script = TestScript()
+        script.set_from_file(self.test_file_path, 'sample.xml')
+        script.save()
