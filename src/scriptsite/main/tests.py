@@ -75,6 +75,18 @@ class XmlAnalysisTest(TestCase):
                 self.assertTrue(test.steps != None)
                 self.assertTrue(test.expected_results != None)
                 self.assertTrue(test.automated_test_id != None)
+                
+    def test_get_value(self):
+        
+        from lxml import etree
+        
+        doc = etree.fromstring('<foo><bar>baz</bar></foo>')
+        
+        ret_val = xml_analysis._get_value(doc, 'bar')
+        self.assertTrue(ret_val == 'baz')
+        
+        ret_val = xml_analysis._get_value(doc, 'quux')
+        self.assertIsNone(ret_val)
         
         
         
