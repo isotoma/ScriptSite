@@ -112,7 +112,7 @@ ROOT_URLCONF = 'scriptsite.urls'
 
 LOGIN_URL = '/login/'
 
-TEST_RUNNER = 'django-test-coverage.runner.run_tests'
+# TEST_RUNNER = 'django-test-coverage.runner.run_tests'
 
 # Override with environment specific settings
 try:

@@ -2,7 +2,9 @@ import os
 
 from mock import Mock
 from lxml.etree import _Element
-from django.test import TestCase
+from django.test import TestCase, Client
+from django.core.urlresolvers import reverse
+from django.contrib.auth.models import User, Permission
 
 import xml_analysis
 from models import TestScript
@@ -102,3 +104,28 @@ class ModelsTest(TestCase):
         script = TestScript()
         script.set_from_file(self.test_file_path, 'sample.xml')
         script.save()
+        
+        
+class UploadViewsTest(TestCase):
+    
+    def setUp(self):
+        """ Set up the environment for the test """
+        # we need an admin user
+        u = User()
+        u.username = 'upload'
+        u.set_password('upload')
+        u.is_staff = True
+        u.save()
+        permission = Permission.objects.get(codename = 'add_testscript')
+        u.user_permissions.add(permission)
+        
+        u.save()
+    
+    def test_view(self):
+        """ Test the upload view """
+        
+        login_success = self.client.login(username = 'upload', password = 'upload')
+        
+        self.assertTrue(login_success)
+        
+        response = self.client.get(reverse('upload'))

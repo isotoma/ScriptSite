@@ -58,6 +58,8 @@ def upload(request):
         
     return render_to_response('upload.html', data, context_instance = RequestContext(request))
 
+
+
 @login_required
 def script_home(request):
     data = {}
