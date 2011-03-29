@@ -18,7 +18,7 @@ from django.contrib.auth.views import login, logout
 from django.contrib import admin
 admin.autodiscover()
 
-from scriptsite.main.views.upload import upload_view
+from scriptsite.main.views.upload import upload_view, upload_post
 from scriptsite.main.views.views import script, script_view, script_home, upload, test_run, test_run_home, view_run, download_run, home
 
 urlpatterns = patterns('',
@@ -50,7 +50,8 @@ urlpatterns = patterns('',
     url(r'testrun/download/(?P<run_id>\d+)/$', download_run, name = 'download_run'),
     url(r'testrun/(?P<run_id>\d+)/$', test_run, name = 'test_run'),
     url(r'testrun/', test_run_home, name = 'test_run_home'),
-    url(r'^upload/', upload_view, name = 'upload'),
+    url(r'^upload/', upload_post, name = 'upload_post'),
+    url(r'^create/', upload_view, name = 'upload'),
 
     url(r'^login/', login, name = 'login'),
     url(r'^logout/', logout, name = 'logout'),

@@ -5,6 +5,7 @@ from lxml.etree import _Element
 from django.test import TestCase, Client
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User, Permission
+from django.http import HttpResponseRedirect
 
 import xml_analysis
 from models import TestScript
@@ -120,6 +121,8 @@ class UploadViewsTest(TestCase):
         u.user_permissions.add(permission)
         
         u.save()
+        self.client = Client()
+        self.test_file_path = os.path.join(os.path.dirname(__file__), '..', 'test_files', 'sample.xml')
     
     def test_view(self):
         """ Test the upload view """
@@ -129,3 +132,40 @@ class UploadViewsTest(TestCase):
         self.assertTrue(login_success)
         
         response = self.client.get(reverse('upload'))
+        
+        self.assertTrue(response.template[0].name == 'upload.html')
+        
+    def test_view_unauthorized(self):
+        """ Test that we're redirected correctly if we're not a valid user """
+        
+        response = self.client.get(reverse('upload'))
+        self.assertTrue(isinstance(response, HttpResponseRedirect))
+        self.assertTrue(response.status_code == 302)
+        
+    def test_upload_post_unauthorized(self):
+        """ Test that we're redirected correctly if we're not a valid user """
+        
+        response = self.client.get(reverse('upload_post'))
+        self.assertTrue(isinstance(response, HttpResponseRedirect))
+        self.assertTrue(response.status_code == 302)
+        
+    def test_upload_post_if_get(self):
+        """ If we get this view, it should redirect to upload view """
+        
+        login_success = self.client.login(username = 'upload', password = 'upload')
+        self.assertTrue(login_success)
+        response = self.client.get(reverse('upload_post'))
+        self.assertTrue(isinstance(response, HttpResponseRedirect))
+        self.assertTrue(response.status_code == 302)
+        
+    def test_upload_post(self):
+        """ Test that we can post a file to this """
+        login_success = self.client.login(username = 'upload', password = 'upload')
+        self.assertTrue(login_success)
+        
+        f = open(self.test_file_path)
+        post_data = {'revision': 1, 'script_file': f}
+        response = self.client.post(reverse('upload_post'), post_data)
+        self.assertTrue(isinstance(response, HttpResponseRedirect))
+        self.assertTrue(response.status_code == 302)
+        self.assertTrue('create' in response._headers['location'][1])
