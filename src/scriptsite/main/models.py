@@ -67,7 +67,7 @@ class SingleTest(models.Model):
     steps = models.TextField(blank = True, null = True)
     expected_results = models.TextField(blank = True, null = True)
     automated_test_id = models.TextField(blank = True, null = True)
-    actual_result = models.TextField(blank = True, null = True)
+    actual_result = models.TextField(blank = True, null = True, default = "")
     passed = models.NullBooleanField(blank = True, null = True)
     
     def get_status_as_string(self):
